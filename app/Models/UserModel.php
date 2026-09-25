@@ -3,9 +3,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-// 1. CREACIÓN DEL MODELO DE USUARIO
-class UserModel extends Model
-{
+class UserModel extends Model{
     // 1.1 Definí una variable protegida que contenga un string con el nombre de la tabla en la base de datos
     // 1.2 Definí una variable protegida que contenga un string con la clave primaria de la tabla
 
