@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 namespace App\Filters;
 use CodeIgniter\Filters\FilterInterface;
@@ -17,3 +18,5 @@ class AuthFilter implements FilterInterface
  }
 };
 
+=======
+>>>>>>> eb7faa6fa79e9b86edadd419b7382a6e53995850
