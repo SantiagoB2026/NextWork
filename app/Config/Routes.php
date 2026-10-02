@@ -8,11 +8,11 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->group('productos', ['filter' => 'auth'], static function ($routes) {
  $routes->get('', 'Usuario::index');
- $routes->get('nuevo', 'Usuario::nuevo');
- $routes->post('guardar', 'Usuario::guardar');
- $routes->get('editar/(:num)', 'Usuario::editar/$1');
- $routes->post('actualizar/(:num)', 'Usuario::actualizar/$1');
- $routes->post('eliminar/(:num)', 'Usuario::eliminar/$1');
+ $routes->get('nuevo', 'Usuarios::nuevo');
+ $routes->post('guardar', 'Usuarios::guardar');
+ $routes->get('editar/(:num)', 'Usuarios::editar/$1');
+ $routes->post('actualizar/(:num)', 'Usuaris::actualizar/$1');
+ $routes->post('eliminar/(:num)', 'Usuarios::eliminar/$1');
 });
 
 $routes->get('/', 'Home::index');
