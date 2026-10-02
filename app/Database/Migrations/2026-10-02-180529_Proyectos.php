@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Proyecto extends Migration
+class Proyectos extends Migration
 {
     public function up()
     {
@@ -19,12 +19,12 @@ class Proyecto extends Migration
 
     ]);
     $this->forge->addKey('id', true);
-    $this->forge->createTable('Proyecto');
+    $this->forge->createTable('Proyectos');
     }
 
     public function down()
     {
-    $this->forge->dropTable('Proyecto');
+    $this->forge->dropTable('Proyectos');
     }
 }
 ?>
