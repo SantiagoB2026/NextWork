@@ -12,6 +12,9 @@ class AuthFilter implements FilterInterface
  if (! session()->get('logueado')) {
  return redirect()->to('/login')->with('error', 'Tenés que iniciar sesión.');
  };
+ if (! session()->get('role')==='admin'){
+    return redirect()->to('/home')->with('error','No tienes acceso como administrador porque no lo eres, atentamente los admins')
+ }
  }
  public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
  {
