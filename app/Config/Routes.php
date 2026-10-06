@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->group('Administrador', ['filter' => 'auth'], static function ($routes) {
- $routes->get('', 'Usuario::index');
+ $routes->get('/', 'Usuario::index');
  $routes->get('nuevo', 'Usuarios::nuevo');
  $routes->post('guardar', 'Usuarios::guardar');
  $routes->get('editar/(:num)', 'Administrador::editar/$1');

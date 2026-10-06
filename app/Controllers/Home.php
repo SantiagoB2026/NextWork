@@ -10,7 +10,7 @@ class Home extends BaseController {
     
     private UserModel $Usuario;
     public function __construct(){
- $this->productos = new UserModel();
+ $this->Usuarios = new UserModel();
  }
     public function index(){
         return view('Usuarios/index', [
@@ -39,7 +39,7 @@ class Home extends BaseController {
  {
             $this->buscar($id);
         $datos = $this->request->getPost(['alias', 'nombre', 'apellido', 'contraseña', 'fecha_nacimiento', 'correo_eletronico']);
-        if (! $this->productos->update($id, $datos)) {
+        if (! $this->Usuarios->update($id, $datos)) {
             return redirect()->back()->withInput()
                 ->with('errores', $this->productos->errors());
  }
@@ -49,7 +49,7 @@ class Home extends BaseController {
         public function eliminar(int $id)
  {
             $this->buscar($id);
-            $this->productos->delete($id);
+            $this->Usuarios->delete($id);
         return redirect()->to('/Usuarios')->with('mensaje', 'Usuario eliminado.');
  }
  
