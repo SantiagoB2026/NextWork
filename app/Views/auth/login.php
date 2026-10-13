@@ -13,6 +13,7 @@
             <?php endif; ?>
 
             <form action="login" method="post">
+                <?= csrf_field() ?>
                 <div>
                <input type="email" placeholder="email"></input>
                 </div>
@@ -21,7 +22,7 @@
                 </div>
                 <button type="submit">Enviar</button>
             <div>
-            <p><a href="register">¿Ya tenés una cuenta? Registrate aquí.</a></p>
+            <p><a href="register">¿No tienes cuenta? Registrate aquí.</a></p>
             </div>
         </div>
     </div>

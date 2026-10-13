@@ -16,6 +16,7 @@
             <?php endif; ?>
 
             <form action="register" method="post">
+                <?= csrf_field() ?>
                 <div>
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -34,7 +35,7 @@
                 <button type="submit">Registrar</button>
             </form>
             <div>
-                <p><a href="login">¿No tenés una cuenta? Inicia sesión aquí.</a></p>
+                <p><a href="login">¿Ya tenes una cuenta? Inicia sesión aquí.</a></p>
             </div>
         </div>
     </div>
