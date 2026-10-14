@@ -17,6 +17,6 @@ class UserModel extends Model{
                                 'fecha_nacimiento' => 'required|valid_date'
  ];
  protected $validationMessages = [
- 'contraseña|' => ['required' => 'es necesario agregar al menos un numero.']
+ 'contraseña|' => ['required' => 'es necesario agregar al menos un número.']
  ];
 }
