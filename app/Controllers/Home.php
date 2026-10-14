@@ -13,7 +13,7 @@ class Home extends BaseController {
  $this->Usuarios = new UserModel();
  }
     public function index(){
-        return view('Usuarios/index', [
+        return view('Usuarios/home', [
             'Usuarios' => $this->Usuarios->orderBy('alias')->findAll()
     ]);
  }
