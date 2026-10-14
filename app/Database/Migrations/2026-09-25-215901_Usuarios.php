@@ -16,6 +16,7 @@ class Usuarios extends Migration
         'contraseña' => ['type' => 'VARCHAR', 'constraint' => 100,'null' => false],
         'correo_electronico' => ['type' => 'VARCHAR','constraint' =>100, 'null' => false],
         'fecha_nacimiento' => ['type' => 'DATE','null' => false],
+        'tipo' => ['type' => 'BOOLEAN' , 'null' => false ,'default' => false],
         'created_at' => ['type' => 'DATETIME', 'null' => true],
         'updated_at' => ['type' => 'DATETIME', 'null' => true],
 

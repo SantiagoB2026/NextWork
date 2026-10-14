@@ -16,7 +16,6 @@ class Auth extends BaseController
     // 2. PROCESO DE REGISTRO DE USUARIO (CORREGIDO)
     public function processRegister()
     {
-        // Validamos usando las reglas exactas de tu UserModel en español
         $rules = [
             'alias'              => "required|min_length[3]",
             'nombre'             => "required",
@@ -40,6 +39,8 @@ class Auth extends BaseController
             'correo_electronico' => $this->request->getPost('correo_electronico'),
             'fecha_nacimiento'   => $this->request->getPost('fecha_nacimiento'),
             'contraseña'         => password_hash($this->request->getPost('contraseña'), PASSWORD_DEFAULT),
+            'tipo' => $this->request->getPost('tipo')
+    
             // Nota: Si agregás 'role' a tu BD, recordá ponerlo también en $allowedFields en tu UserModel
         ]);
 
