@@ -47,6 +47,7 @@
                     <label for="contraseña" class="form-label">Contraseña:</label>
                     <input type="password" id="contraseña" name="contraseña" class="form-control" required >
                 </div>
+                
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Rol:</label>
                        <select name="tipo" id="tipo" class="form-control" required>
@@ -68,3 +69,8 @@
 </div>
 
 <?= view('templates/footer') ?>
+
+
+
+
+ /**blabal */
