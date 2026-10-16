@@ -22,7 +22,8 @@ class Auth extends BaseController
             'apellido'           => "required",
             'correo_electronico' => "required|valid_email", 
             'fecha_nacimiento'   => "required|valid_date",
-            'contraseña'         => "required|min_length[8]" 
+            'contraseña'         => "required|min_length[8]",
+            'tipo'               => 'required|in_list[inversionista,desarrollador,Inversionista,Desarrollador]'
         ];
 
         if (!$this->validate($rules)) {

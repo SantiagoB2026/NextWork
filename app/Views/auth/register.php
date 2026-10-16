@@ -49,11 +49,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Rol:</label>
-                        <select name="tipo" id="tipo" class="form-control" required>
-                            <option value="" disabled selected>Selecciona tu rol</option>
-                            <option value="0">Desarrollador</option>
-                            <option value="1">Inversionista</option>
-                        </select>
+                       <select name="tipo" id="tipo" class="form-control" required>
+                            <option value="">Selecciona un rol</option>
+                            <option value="inversionista">Inversionista</option> 
+                            <option value="desarrollador">Desarrollador</option> 
+</select>
                 </div>
                 <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary">Registrar</button>

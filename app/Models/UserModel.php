@@ -13,7 +13,7 @@ class UserModel extends Model{
                                'nombre' => 'required|max_length[50]',
                                'apellido' => 'required|max_length[50]',
                                'contraseña' => 'required|min_length[8]',
-                               'tipo'               => 'in_list[0,1,true,false]',
+                               'tipo' => 'required|in_list[inversionista,desarrollador]',
                                 'correo_electronico' => 'required|valid_email',
                                 'fecha_nacimiento' => 'required|valid_date'
  ];
