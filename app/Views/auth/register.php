@@ -40,12 +40,12 @@
 
                 <div class="mb-3">
                     <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" required value="<?= old('fecha_nacimiento') ?>">
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" min="1926-01-01" max="2026-10-16" class="form-control" required value="<?= old('fecha_nacimiento') ?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="contraseña" class="form-label">Contraseña:</label>
-                    <input type="password" id="contraseña" name="contraseña" class="form-control" required>
+                    <input type="password" id="contraseña" name="contraseña" class="form-control" required >
                 </div>
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Rol:</label>
