@@ -45,8 +45,14 @@
 
                 <div class="mb-3">
                     <label for="contraseña" class="form-label">Contraseña:</label>
-                    <input type="password" id="contraseña" name="contraseña" class="form-control" required >
+                <div class="input-group">
+                    <input type="password" id="contraseña" name="contraseña" class="form-control" required>
+                    <button class="btn btn-outline-secondary" type="button" id="btnTogglePassword">
+                        Mostrar
+                    </button>
                 </div>
+                </div>
+
                 
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Rol:</label>
@@ -69,8 +75,15 @@
 </div>
 
 <?= view('templates/footer') ?>
-
-
-
-
- /**blabal */
+<script>document.getElementById('btnTogglePassword').addEventListener('click', function () {
+  const passwordInput = document.getElementById('contraseña');
+  
+  // Alternar el tipo de input
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    this.textContent = 'Ocultar';
+  } else {
+    passwordInput.type = 'password';
+    this.textContent = 'Mostrar';
+  }
+});</script>

@@ -34,6 +34,9 @@
                 <div>
                     <label for="contraseña">Contraseña:</label>
                     <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                    <button class="btn btn-outline-secondary" type="button" id="btnTogglePassword">
+                        Mostrar
+                    </button>
                 </div>
                 
                 <button type="submit">Enviar</button>
@@ -47,3 +50,15 @@
 </div>
 
 <?= view('templates/footer') ?>
+<script>document.getElementById('btnTogglePassword').addEventListener('click', function () {
+  const passwordInput = document.getElementById('contraseña');
+  
+  // Alternar el tipo de input
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    this.textContent = 'Ocultar';
+  } else {
+    passwordInput.type = 'password';
+    this.textContent = 'Mostrar';
+  }
+});</script>
