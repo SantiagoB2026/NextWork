@@ -1,10 +1,7 @@
-</div> 
-
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-    <div class="container">
-        <small> <?= date('Y') ?> - Todos los derechos reservados.</small>
-    </div>
-</footer>
+    <footer class="main-footer">
+        <div class="footer-border"></div>
+        <div class="footer-container"></div>
+    </footer>
 
 </body>
 </html>
