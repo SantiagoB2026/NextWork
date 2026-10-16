@@ -1,13 +1,17 @@
 <?= view('templates/header') ?>
 
-<div class="row my-5">
-    <div class="col text-center">
-        <?php if (!session()->get('isLoggedIn')): ?>
-            <h2 class="text-muted">Bienvenido a la plataforma</h2>
-            <p class="text-secondary">Iniciá sesión o registrate desde el menú superior para comenzar.</p>
+ <main class="main-content">
+        <div class="welcome-container">
+            <?php if (!session()->get('isLoggedIn')): ?>
+            <h1 class="title-welcome">BIENVENIDO A <span class="brand-name">NEXTWORK</span></h1>
             
-        <?php endif; ?>
-    </div>
-</div>
+            <div class="button-group">
+                <a href="<?= site_url('register') ?>" class="btn btn-dark">Crear cuenta</a>
+                <a href="<?= site_url('login') ?>" class="btn btn-green">Ya tengo cuenta</a>
 
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </main>
 <?= view('templates/footer') ?>

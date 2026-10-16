@@ -75,6 +75,7 @@
 </div>
 
 <?= view('templates/footer') ?>
+<<<<<<< HEAD
 <script>document.getElementById('btnTogglePassword').addEventListener('click', function () {
   const passwordInput = document.getElementById('contraseña');
   
@@ -87,3 +88,9 @@
     this.textContent = 'Mostrar';
   }
 });</script>
+=======
+
+
+
+
+>>>>>>> 7d68ce25be610b69b318d33bab3d3f2463f91f3a
