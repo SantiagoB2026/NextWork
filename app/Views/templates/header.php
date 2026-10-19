@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido a Nextwork</title>
+<link rel="icon" type="image/png" href="../assets/img/Logo_Nextwork.png">
     <!-- Importación de tipografía -->
     <link href="https://googleapis.com" rel="stylesheet">
     
     <!-- ESTILOS INTERNOS (Para evitar problemas de rutas de carpetas) -->
     <style>
         :root {
-            --bg-main: #F7F9F6;
+            --bg-main: #F0FFF0;
             --bg-dark-panels: #1F2226;
             --text-dark: #1A1D20;
             --accent-green: #00B653;
@@ -51,10 +52,26 @@
             align-items: center;
         }
 
+
         .brand-logo {
+<<<<<<< HEAD
             width: 15px;
             height: 15px;
         }
+=======
+        display: flex;
+        align-items: center;
+        height: 100%;
+        }
+
+        .brand-logo img {
+        height: 50px;                  
+        width: 50px;                   
+        object-fit: contain;          
+        display: block;
+        }
+
+>>>>>>> a6f5214dd77eb9ef864040ffc3f77a98e1e2e3c9
 
         .user-avatar {
             width: 44px;
@@ -165,6 +182,12 @@
     <header class="main-header">
         <div class="header-container">
             <div class="brand-logo">
+<<<<<<< HEAD
+=======
+               <a href="/">
+                    <img src="../assets/img/Logo_Nextwork.png" alt="Logo Nextwork">
+                </a>
+>>>>>>> a6f5214dd77eb9ef864040ffc3f77a98e1e2e3c9
             </div>
             <div class="user-avatar"></div>
         </div>
