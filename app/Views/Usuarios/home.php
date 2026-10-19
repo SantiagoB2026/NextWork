@@ -9,8 +9,11 @@
                 <a href="<?= site_url('register') ?>" class="btn btn-dark">Crear cuenta</a>
                 <a href="<?= site_url('login') ?>" class="btn btn-green">Ya tengo cuenta</a>
 
+                <div class="d-flex align-items-center text-white">
+                <?php elseif (session()->get('isLoggedIn')): ?>
+                <span class="me-3 small">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
+                <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
                 <?php endif; ?>
-
             </div>
         </div>
     </main>

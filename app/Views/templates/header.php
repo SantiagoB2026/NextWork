@@ -52,31 +52,8 @@
         }
 
         .brand-logo {
-            width: 32px;
-            height: 32px;
-            position: relative;
-        }
-
-        .brand-logo::before,
-        .brand-logo::after {
-            content: '';
-            position: absolute;
-            background-color: var(--accent-green);
-        }
-
-        .brand-logo::before {
-            width: 10px;
-            height: 32px;
-            left: 0;
-            top: 0;
-        }
-
-        .brand-logo::after {
-            width: 22px;
-            height: 10px;
-            right: 0;
-            top: 0;
-            transform: skewY(-12deg);
+            width: 15px;
+            height: 15px;
         }
 
         .user-avatar {
@@ -187,7 +164,8 @@
     <!-- 1. HEADER SEPARADO -->
     <header class="main-header">
         <div class="header-container">
-            <div class="brand-logo"></div>
+            <div class="brand-logo">
+            </div>
             <div class="user-avatar"></div>
         </div>
         <div class="header-border"></div>
