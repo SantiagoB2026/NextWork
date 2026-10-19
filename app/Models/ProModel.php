@@ -3,7 +3,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class UserModel extends Model{
+class ProModel extends Model{
    protected $table = 'Proyectos';
  protected $primaryKey = 'id_Proyecto';
  protected $returnType = 'array';

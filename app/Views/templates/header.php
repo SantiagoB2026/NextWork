@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido a Nextwork</title>
+<link rel="icon" type="image/png" href="../assets/img/Logo_Nextwork.png">
     <!-- Importación de tipografía -->
     <link href="https://googleapis.com" rel="stylesheet">
     
     <!-- ESTILOS INTERNOS (Para evitar problemas de rutas de carpetas) -->
     <style>
         :root {
-            --bg-main: #F7F9F6;
+            --bg-main: #F0FFF0;
             --bg-dark-panels: #1F2226;
             --text-dark: #1A1D20;
             --accent-green: #00B653;
@@ -51,33 +52,20 @@
             align-items: center;
         }
 
+
         .brand-logo {
-            width: 32px;
-            height: 32px;
-            position: relative;
+        display: flex;
+        align-items: center;
+        height: 100%;
         }
 
-        .brand-logo::before,
-        .brand-logo::after {
-            content: '';
-            position: absolute;
-            background-color: var(--accent-green);
+        .brand-logo img {
+        height: 50px;                  
+        width: 50px;                   
+        object-fit: contain;          
+        display: block;
         }
 
-        .brand-logo::before {
-            width: 10px;
-            height: 32px;
-            left: 0;
-            top: 0;
-        }
-
-        .brand-logo::after {
-            width: 22px;
-            height: 10px;
-            right: 0;
-            top: 0;
-            transform: skewY(-12deg);
-        }
 
         .user-avatar {
             width: 44px;
@@ -187,7 +175,11 @@
     <!-- 1. HEADER SEPARADO -->
     <header class="main-header">
         <div class="header-container">
-            <div class="brand-logo"></div>
+            <div class="brand-logo">
+               <a href="/">
+                    <img src="../assets/img/Logo_Nextwork.png" alt="Logo Nextwork">
+                </a>
+            </div>
             <div class="user-avatar"></div>
         </div>
         <div class="header-border"></div>
