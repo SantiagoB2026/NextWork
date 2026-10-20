@@ -13,18 +13,18 @@ class Auth extends BaseController
         return view('auth/register'); 
     }
 
-    // 2. PROCESO DE REGISTRO DE USUARIO (CORREGIDO)
+    // 2. PROCESO DE REGISTRO DE USUARIO 
     public function processRegister()
     {
         $rules = [
-            'alias'              => "required|min_length[3]",
-            'nombre'             => "required",
-            'apellido'           => "required",
-            'correo_electronico' => "required|valid_email", 
-            'fecha_nacimiento'   => "required|valid_date",
-            'contraseña'         => "required",
-            'tipo'               => 'required|in_list[inversionista,desarrollador,Inversionista,Desarrollador]'
-        ];
+            'alias'              => 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[Usuario.alias]',
+            'nombre'             => 'required|max_length[50]',
+            'apellido'           => 'required|max_length[50]',
+            'tipo'               => 'required|in_list[inversionista,desarrollador]',
+            'correo_electronico' => 'required|valid_email|is_unique[Usuario.correo_electronico]',
+            'fecha_nacimiento'   => 'required|valid_date',
+            'contraseña'         => 'required' 
+    ];
 
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errores', $this->validator->getErrors());
