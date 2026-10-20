@@ -22,7 +22,7 @@ class Auth extends BaseController
             'apellido'           => "required",
             'correo_electronico' => "required|valid_email", 
             'fecha_nacimiento'   => "required|valid_date",
-            'contraseña'         => "required|min_length[8]",
+            'contraseña'         => "required",
             'tipo'               => 'required|in_list[inversionista,desarrollador,Inversionista,Desarrollador]'
         ];
 
@@ -62,26 +62,33 @@ class Auth extends BaseController
         return view('auth/login');
     }
 
-    // 4. PROCESO DE INICIO DE SESIÓN (CORREGIDO)
+    // 4. PROCESO DE INICIO DE SESIÓN 
     public function processLogin()
     {
         $userModel = new UserModel();
 
-        // En la vista de login deberás usar name="correo_electronico" y name="contraseña"
+        
         $email    = $this->request->getPost('correo_electronico');
         $password = $this->request->getPost('contraseña');
 
-        // Buscamos en la columna correcta de tu tabla
+       
         $user = $userModel->where('correo_electronico', $email)->first();
 
         if ($user && password_verify($password, $user['contraseña'])) {
 
             session()->set([
                 'id'         => $user['id'],
-                'name'       => $user['nombre'], // Guardamos el nombre en sesión
+                'name'       => $user['nombre'], 
                 'email'      => $user['correo_electronico'],
+                'tipo'       => $user['tipo'], 
                 'isLoggedIn' => true
-            ]);
+    ]);
+        if ($user['tipo'] === 'inversionista') {
+            return redirect()->to('/dashboard-inversionista');
+    } else {
+            return redirect()->to('/dashboard-desarrollador');
+    }
+
 
             return redirect()->to('/');
         }

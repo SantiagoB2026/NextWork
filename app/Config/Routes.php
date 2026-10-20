@@ -20,3 +20,9 @@ $routes->group('Administrador', ['filter' => 'auth'], static function ($routes) 
     $routes->post('actualizar/(:num)', 'Administrador::actualizar/$1');
     $routes->post('eliminar/(:num)', 'Administrador::eliminar/$1');
 });
+$routes->group('desarrollador', ['filter' => 'isDesarrollador'], function($routes) {
+    $routes->get('crear-proyecto', 'Proyectos::crear');
+    $routes->post('guardar-proyecto', 'Proyectos::guardar');
+});
+$routes->get('dashboard-inversionista', 'Dashboard::inversionista');
+$routes->get('dashboard-desarrollador', 'Dashboard::desarrollador');

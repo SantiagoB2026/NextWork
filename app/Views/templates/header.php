@@ -182,12 +182,6 @@
     <header class="main-header">
         <div class="header-container">
             <div class="brand-logo">
-<<<<<<< HEAD
-=======
-               <a href="/">
-                    <img src="../assets/img/Logo_Nextwork.png" alt="Logo Nextwork">
-                </a>
->>>>>>> a6f5214dd77eb9ef864040ffc3f77a98e1e2e3c9
             </div>
             <div class="user-avatar"></div>
         </div>
