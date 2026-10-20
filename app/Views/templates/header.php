@@ -54,11 +54,6 @@
 
 
         .brand-logo {
-<<<<<<< HEAD
-            width: 15px;
-            height: 15px;
-        }
-=======
         display: flex;
         align-items: center;
         height: 100%;
@@ -71,7 +66,6 @@
         display: block;
         }
 
->>>>>>> a6f5214dd77eb9ef864040ffc3f77a98e1e2e3c9
 
         .user-avatar {
             width: 44px;
@@ -182,14 +176,18 @@
     <header class="main-header">
         <div class="header-container">
             <div class="brand-logo">
-<<<<<<< HEAD
-=======
                <a href="/">
                     <img src="../assets/img/Logo_Nextwork.png" alt="Logo Nextwork">
                 </a>
->>>>>>> a6f5214dd77eb9ef864040ffc3f77a98e1e2e3c9
             </div>
             <div class="user-avatar"></div>
+
         </div>
+                            <div class="d-flex align-items-center text-white">
+                        <?php if (session()->get('isLoggedIn')): ?>
+                        <span class="me-3 small">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
+                        <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
+                        <?php endif; ?>
+                    </div>
         <div class="header-border"></div>
     </header>
