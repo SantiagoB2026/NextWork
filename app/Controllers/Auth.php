@@ -13,18 +13,18 @@ class Auth extends BaseController
         return view('auth/register'); 
     }
 
-    // 2. PROCESO DE REGISTRO DE USUARIO (CORREGIDO)
+    // 2. PROCESO DE REGISTRO DE USUARIO 
     public function processRegister()
     {
         $rules = [
-            'alias'              => "required|min_length[3]",
-            'nombre'             => "required",
-            'apellido'           => "required",
-            'correo_electronico' => "required|valid_email", 
-            'fecha_nacimiento'   => "required|valid_date",
-            'contraseña'         => "required|min_length[8]",
-            'tipo'               => 'required|in_list[inversionista,desarrollador,Inversionista,Desarrollador]'
-        ];
+            'alias'              => 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[Usuario.alias]',
+            'nombre'             => 'required|max_length[50]',
+            'apellido'           => 'required|max_length[50]',
+            'tipo'               => 'required|in_list[inversionista,desarrollador]',
+            'correo_electronico' => 'required|valid_email|is_unique[Usuario.correo_electronico]',
+            'fecha_nacimiento'   => 'required|valid_date',
+            'contraseña'         => 'required' 
+    ];
 
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errores', $this->validator->getErrors());
@@ -62,26 +62,33 @@ class Auth extends BaseController
         return view('auth/login');
     }
 
-    // 4. PROCESO DE INICIO DE SESIÓN (CORREGIDO)
+    // 4. PROCESO DE INICIO DE SESIÓN 
     public function processLogin()
     {
         $userModel = new UserModel();
 
-        // En la vista de login deberás usar name="correo_electronico" y name="contraseña"
+        
         $email    = $this->request->getPost('correo_electronico');
         $password = $this->request->getPost('contraseña');
 
-        // Buscamos en la columna correcta de tu tabla
+       
         $user = $userModel->where('correo_electronico', $email)->first();
 
         if ($user && password_verify($password, $user['contraseña'])) {
 
             session()->set([
                 'id'         => $user['id'],
-                'name'       => $user['nombre'], // Guardamos el nombre en sesión
+                'name'       => $user['nombre'], 
                 'email'      => $user['correo_electronico'],
+                'tipo'       => $user['tipo'], 
                 'isLoggedIn' => true
-            ]);
+    ]);
+        if ($user['tipo'] === 'inversionista') {
+            return redirect()->to('/dashboard-inversionista');
+    } else {
+            return redirect()->to('/dashboard-desarrollador');
+    }
+
 
             return redirect()->to('/');
         }

@@ -18,9 +18,12 @@
     <header class="main-header">
         <div class="header-container">
             <div class="brand-logo">
+<<<<<<< HEAD
                <a href="/">
                     <img src="../assets/img/Logo_Nextwork.png" alt="Logo Nextwork">
                 </a>
+=======
+>>>>>>> d62e8495d835428fe7f21b68374c683e6d82abe5
             </div>
             <form action="<?= site_url('search/results') ?>" method="GET" class="search-container">
     <input type="text" name="query" class="search-input" placeholder="Search" autocomplete="off">

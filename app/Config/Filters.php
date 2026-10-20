@@ -36,7 +36,10 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth' => \App\Filters\AuthFilter::class,
-    ];
+        'isDesarrollador' => \App\Filters\DesarrolladorFilter::class,
+        'isInversionista' => \App\Filters\InversionistaFilter::class
+];
+
 
     /**
      * List of special required filters.
