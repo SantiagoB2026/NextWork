@@ -18,25 +18,26 @@
     <header class="main-header">
         <div class="header-container">
             <div class="brand-logo">
-<<<<<<< HEAD
                <a href="/">
                     <img src="../assets/img/Logo_Nextwork.png" alt="Logo Nextwork">
                 </a>
-=======
->>>>>>> d62e8495d835428fe7f21b68374c683e6d82abe5
             </div>
             <form action="<?= site_url('search/results') ?>" method="GET" class="search-container">
     <input type="text" name="query" class="search-input" placeholder="Search" autocomplete="off">
     <button type="submit" class="search-button">Search</button>
 </form>
-            <div class="user-avatar"></div>
-
-        </div>
-                            <div class="d-flex align-items-center text-white">
-                        <?php if (session()->get('isLoggedIn')): ?>
-                        <span class="me-3 small">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
-                        <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
-                        <?php endif; ?>
+            <div class="user-avatar">
+                        </div>
+                    <div class="d-flex align-items-center text-white">
+                        <div class="button-group">
+                            <?php if (session()->get('isLoggedIn')): ?>
+                            <span class="me-3 small">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
+                            <a href="<?= site_url('logout') ?>" class="btn btn-cerrar">Cerrar Sesión</a>
+                             <?php endif; ?>
+                        </div>
                     </div>
+            </div>
+
+
         <div class="header-border"></div>
     </header>

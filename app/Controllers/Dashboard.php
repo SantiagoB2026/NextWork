@@ -20,3 +20,4 @@ class Dashboard extends BaseController{
         return view('Usuarios/desarrollador');
     }
 }
+

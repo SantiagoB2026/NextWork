@@ -141,6 +141,22 @@
             box-shadow: 0 6px 20px rgba(0, 182, 83, 0.4);
         }
 
+
+        .btn-cerrar {
+            background-color: var(--accent-green);
+            color: #FFFFFF;
+            padding: 8px 20px;       
+            border-radius: 50px;    
+            border: none;            
+                cursor: pointer; 
+            font-size: 15px;
+        }
+
+        .btn-cerrar:hover {
+             background-color:red;
+            box-shadow: 0 6px 20px red;
+        }
+
         /* FOOTER */
         .main-footer {
             width: 100%;
