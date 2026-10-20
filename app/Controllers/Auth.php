@@ -83,14 +83,7 @@ class Auth extends BaseController
                 'tipo'       => $user['tipo'], 
                 'isLoggedIn' => true
     ]);
-        if ($user['tipo'] === 'inversionista') {
-            return redirect()->to('/dashboard-inversionista');
-    } else {
-            return redirect()->to('/dashboard-desarrollador');
-    }
-
-
-            return redirect()->to('/');
+             return redirect()->to('/');
         }
 
         return redirect()->back()->withInput()->with('errores', ['login' => 'Correo o contraseña incorrectos.']);
