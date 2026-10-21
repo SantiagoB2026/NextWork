@@ -24,5 +24,5 @@ $routes->group('desarrollador', ['filter' => 'isDesarrollador'], function($route
     $routes->get('crear-proyecto', 'Proyectos::crear');
     $routes->post('guardar-proyecto', 'Proyectos::guardar');
 });
-$routes->get('dashboard-inversionista', 'Dashboard::inversionista');
-$routes->get('dashboard-desarrollador', 'Dashboard::desarrollador');
+
+
