@@ -1,0 +1,404 @@
+/* ==========================================================================
+   ESTILOS COMPONENTE HEADER - NEXTWORK 
+   ========================================================================== */
+
+/* Barra Superior Decorativa */
+.top-line {
+    height: 4px;
+    background-color: #00b464;
+    width: 100%;
+}
+
+/* Contenedor del Header Principal */
+.main-header {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 15px 0 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Fila Superior: Logo, Buscador y Acciones */
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilo para el área del Logotipo */
+.brand-logo img {
+    height: 30px; 
+    width: auto;
+    display: block;
+}
+
+/* Estructura del Formulario de Búsqueda */
+form.search-container {
+    display: flex !important;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    width: 45%;
+    height: 36px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.search-input {
+    flex: 1;
+    border: none !important;
+    outline: none !important;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.search-input::placeholder {
+    color: #999999;
+}
+
+.search-button {
+    background-color: #00b464;
+    border: none !important;
+    width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: #009650;
+}
+
+.search-button::before {
+    content: '🔍';
+    color: #ffffff;
+    font-size: 13px;
+}
+
+/* Grupo de Botones de Sesión / Autenticación */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.welcome-text {
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+}
+
+/* Botón cerrar sesión / Registro */
+.btn-cerrar, .btn-register {
+    border: 1px solid #cccccc !important;
+    background-color: transparent !important;
+    color: #333333 !important;
+    padding: 6px 16px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: normal;
+}
+
+.btn-cerrar:hover, .btn-register:hover {
+    background-color: #f5f5f5 !important;
+    border-color: #b3b3b3 !important;
+}
+
+.btn-login {
+    background: transparent !important;
+    border: none !important;
+    color: #333333 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    padding: 0 !important;
+}
+
+.btn-login:hover {
+    text-decoration: underline !important;
+}
+
+/* Navegación Inferior (Menú de Etiquetas) */
+.nav-tags-container {
+    max-width: 1200px;
+    margin: 15px auto 0 auto;
+    padding: 0 20px;
+}
+
+.nav-tags {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+
+.nav-tags li a {
+    text-decoration: none;
+    color: #333333;
+    font-weight: 400;
+    transition: color 0.15s ease;
+}
+
+.nav-tags li a:hover {
+    color: #00b464;
+}
+
+.nav-tags .divider {
+    color: #cccccc;
+    font-weight: 300;
+    user-select: none;
+}
+
+.nav-tags .discover-link {
+    font-weight: 700;
+    color: #333333;
+}
+
+/* Ajustes de Responsividad */
+@media (max-width: 768px) {
+    .header-container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    form.search-container {
+        width: 100%;
+        order: 3;
+    }
+    .nav-tags {
+        gap: 12px;
+        font-size: 13px;
+    }
+}
+
+/* ==========================================================================
+   ESTILOS COMPONENTE MAIN / BODY - NEXTWORK 
+   ========================================================================== */
+
+/* Contenedor General del Contenido */
+.main-content {
+    max-width: 1000px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
+}
+
+/* --- Estilos de la Bienvenida original y Roles --- */
+.welcome-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-welcome {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.brand-name {
+    color: #00b464;
+}
+
+/* Botones de acción originales estilizados */
+.auth-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-dark-custom {
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.btn-dark-custom:hover {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.btn-green-custom {
+    background-color: #00b464;
+    color: #ffffff;
+}
+
+.btn-green-custom:hover {
+    background-color: #009650;
+    color: #ffffff;
+}
+
+/* Estilo para las etiquetas de roles */
+.badge-title {
+    font-size: 20px;
+    color: #666666;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+
+/* --- Estilos del Prototipo Gráfico (Cajas Verdes) --- */
+.mockup-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    color: #333333;
+    margin-bottom: 25px;
+}
+
+/* Cajas contenedoras verdes (IMG) */
+.image-placeholder {
+    background-color: #00c86e;
+    border-radius: 8px;
+    color: #1e4620;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+
+/* Proporciones de la caja grande */
+.hero-image {
+    height: 260px;
+}
+
+/* Sistema Grid para los Proyectos Destacados Inferiores */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Proporciones de las dos cajas de abajo */
+.project-card {
+    height: 240px;
+}
+
+/* --- Adaptación para pantallas de Celulares --- */
+@media (max-width: 768px) {
+    .auth-action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-action {
+        width: 100%;
+        max-width: 280px;
+    }
+    .hero-image {
+        height: 180px;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr; /* Pasa de dos columnas a una sola fila */
+        gap: 20px;
+    }
+    .project-card {
+        height: 180px;
+    }
+}
+
+
+/* ==========================================================================
+   ESTILOS COMPONENTE FOOTER - NEXTWORK 
+   ========================================================================== */
+
+/* Contenedor del Bloque del Footer */
+.main-footer {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    padding: 30px 0;
+    margin-top: auto; /* Garantiza que el footer se quede abajo si hay poco contenido */
+    width: 100%;
+}
+
+/* Alineación interna según el prototipo */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separa el símbolo a la izquierda y tu logo a la derecha */
+}
+
+/* Símbolo estilizado del prototipo gráfico (Esquina inferior izquierda) */
+.footer-logo-symbol {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    color: #ffffff;
+    user-select: none;
+}
+
+/* Contenedor de tu logotipo e información original de marca */
+.main-footer .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-footer .brand-logo img {
+    height: 24px; /* Proporción adecuada para el pie de página */
+    width: auto;
+    display: block;
+    opacity: 0.9;
+}
+
+.copyright-text {
+    font-size: 13px;
+    color: #cccccc;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* Adaptación para pantallas de Celulares */
+@media (max-width: 576px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .main-footer .brand-logo {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+.superlogo{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+

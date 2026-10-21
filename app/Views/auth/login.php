@@ -23,7 +23,7 @@
     width: 100%;
     max-width: 520px; /* Un poco más angosta que el registro al tener menos campos */
     background-color: #1e293b;
-    border: 1px solid #334155;
+    border: 1px solid #00B653;
     border-radius: 16px;
     padding: 45px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
