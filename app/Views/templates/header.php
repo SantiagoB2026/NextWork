@@ -26,15 +26,16 @@
     <input type="text" name="query" class="search-input" placeholder="Search" autocomplete="off">
     <button type="submit" class="search-button">Search</button>
 </form>
-            <div class="user-avatar">
-                        </div>
-                    <div class="d-flex align-items-center text-white">
-                        <div class="button-group">
+  <div class="button-group">
                             <?php if (session()->get('isLoggedIn')): ?>
                             <span class="me-3 small">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
                             <a href="<?= site_url('logout') ?>" class="btn btn-cerrar">Cerrar Sesión</a>
                              <?php endif; ?>
                         </div>
+            <div class="user-avatar">
+                        </div>
+                    <div class="d-flex align-items-center text-white">
+
                     </div>
             </div>
 
