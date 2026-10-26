@@ -76,7 +76,7 @@ form.search-container {
 }
 
 .search-button::before {
-    content: '🔍';
+    content: url(../img/No\ \(6\).png);
     color: #ffffff;
     font-size: 13px;
 }
@@ -108,9 +108,14 @@ form.search-container {
     line-height: normal;
 }
 
-.btn-cerrar:hover, .btn-register:hover {
-    background-color: #f5f5f5 !important;
-    border-color: #b3b3b3 !important;
+.btn-register:hover {
+    background-color: #00bf63 !important;
+    border-color: #008243 !important;
+}
+
+.btn-cerrar:hover{
+background-color: red !important;
+
 }
 
 .btn-login {
@@ -125,6 +130,7 @@ form.search-container {
 
 .btn-login:hover {
     text-decoration: underline !important;
+    color:#00bf63;
 }
 
 /* Navegación Inferior (Menú de Etiquetas) */
@@ -385,7 +391,7 @@ form.search-container {
 /* Adaptación para pantallas de Celulares */
 @media (max-width: 576px) {
     .footer-container {
-        flex-direction: column;
+        flex-direction:row;
         gap: 20px;
         text-align: center;
     }
@@ -395,10 +401,7 @@ form.search-container {
     }
 }
 
-.superlogo{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+.logo-footer {
+    height: 30px;
+    width: auto;
 }
-

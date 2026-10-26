@@ -47,6 +47,7 @@
                 <a href="<?= site_url('login') ?>" class="btn btn-login">Iniciar sesión</a>
             <?php endif; ?>
         </div>
+<a href=""><img class="avatar-img" src="https://github.com/mdo.png" alt="mdo" width="50" height="50"></a>
     </div>
 
 
@@ -65,6 +66,8 @@
             <li><a href="#">Etiqueta</a></li>
             <li class="divider">|</li>
             <li><a href="#" class="discover-link">Descubrir</a></li>
+
+            
         </ul>
     </nav>
 </header>

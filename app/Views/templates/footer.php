@@ -6,12 +6,10 @@
                 <div class="brand-logo">
                 <img src="../assets/img/Logo_Nextwork_Blanco.png" alt="Logo Nextwork">
                 <span class="copyright-text">NextWork © 2026</span>
-            </div>
-            <div class="superlogo">
-                <img src="../assets/img/logoblancocompleto.png">
+
             </div>
         </div>
-            
+                <img src="../assets/img/logoblancocompleto.png" class="logo-footer" alt="Logo Nextwork">
 
         </div>
     </footer>

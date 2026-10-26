@@ -21,7 +21,34 @@
     <!-- Sección 1: Bloque Principal -->
     <section class="mockup-section">
         <h2 class="section-title">Haz tus proyectos realidad</h2>
-        <div class="image-placeholder hero-image">IMG</div>
+<div id="carouselExampleDark" class="carousel carousel-overlay slide" data-bs-theme="dark">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="..." class="d-block w-100 rounded-5" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="..." class="d-block w-100 rounded-5" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100 rounded-5" alt="...">
+    </div>
+  </div>
+  <div class="carousel-overlay-controls">
+    <button class="btn-icon btn-sm btn-subtle theme-secondary" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-icon-prev" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <button class="btn-icon btn-sm btn-subtle theme-secondary" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-icon-next" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
     </section>
 
     <!-- Sección 2: Bloque de Proyectos Destacados -->
@@ -34,5 +61,7 @@
     </section>
 </main>
 <?php endif; ?>
+
+
 
 <?= view('templates/footer') ?>
