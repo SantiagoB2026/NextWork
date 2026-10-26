@@ -21,3 +21,8 @@ class Dashboard extends BaseController{
     }
 }
 
+/**
+ * Controlador para manejar el panel de control (dashboard) de los usuarios.
+ * Dependiendo del tipo de usuario (inversionista o desarrollador), se redirige a la vista correspondiente.
+ */
+
