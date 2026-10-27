@@ -39,16 +39,16 @@
         <!-- Grupo de Botones / Control de sesión PHP -->
         <div class="button-group">
             <?php if (session()->get('isLoggedIn')): ?>
-                <span class="welcome-text">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
                 <a href="<?= site_url('logout') ?>" class="btn btn-cerrar">Cerrar Sesión</a>
-                <a href="<?= site_url('perfil') ?>" class="btn btn-login">Mi perfil</a>
             <?php else: ?>
                 <!-- Elementos por si no ha iniciado sesión, alineados al diseño -->
                 <a href="<?= site_url('register') ?>" class="btn btn-register">Registrarse</a>
                 <a href="<?= site_url('login') ?>" class="btn btn-login">Iniciar sesión</a>
             <?php endif; ?>
         </div>
-<a href=""><img class="avatar-img" src="https://github.com/mdo.png" alt="mdo" width="50" height="50"></a>
+<a href="<?= site_url('perfil') ?>" class="btn btn-login"><div class="avatar-img" id="ewAvatar">
+  <?= esc(mb_substr(session()->get('name'), 0, 1)) ?>
+</div></a>
     </div>
 
 
