@@ -41,6 +41,7 @@
             <?php if (session()->get('isLoggedIn')): ?>
                 <span class="welcome-text">Bienvenido <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
                 <a href="<?= site_url('logout') ?>" class="btn btn-cerrar">Cerrar Sesión</a>
+                <a href="<?= site_url('perfil') ?>" class="btn btn-login">Mi perfil</a>
             <?php else: ?>
                 <!-- Elementos por si no ha iniciado sesión, alineados al diseño -->
                 <a href="<?= site_url('register') ?>" class="btn btn-register">Registrarse</a>

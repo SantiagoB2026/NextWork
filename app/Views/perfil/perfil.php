@@ -358,10 +358,10 @@
       <div class="ew-avatar" id="ewAvatar">N</div>
 
       <div class="ew-creator">
-        <h1 id="ewName"><span> <?= esc(strtok(session()->get('nombre') ?? '', ' ')) ?>!!!</span>
+        <h1 id="alias"><span> <?= esc(strtok(session()->get('alias') ?? '', ' ')) ?>!!!</span>
           <span class="ew-verified" title="Creador">✓</span>
         </h1>
-        <div class="ew-handle" id="ewHandle">@elnoki · Creador</div>
+        <div class="ew-handle" id="ewHandle"><span> <?= esc(strtok(session()->get('nombre, apellido') ?? '', ' ')) ?>!!!</span></div>
       </div>
 
       <div class="ew-actions">

@@ -17,13 +17,13 @@ class Auth extends BaseController
     public function processRegister()
     {
         $rules = [
-            'alias'              => 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[Usuario.alias]',
-            'nombre'             => 'required|max_length[50]',
-            'apellido'           => 'required|max_length[50]',
-            'tipo'               => 'required|in_list[inversionista,desarrollador]',
-            'correo_electronico' => 'required|valid_email|is_unique[Usuario.correo_electronico]',
-            'fecha_nacimiento'   => 'required|valid_date',
-            'contraseña'         => 'required' 
+                'alias'=> 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[Usuario.alias]',
+                'nombre'             => 'required|max_length[50]',
+                'apellido'           => 'required|max_length[50]',
+                'contraseña'         => 'required',
+                'tipo'               => 'required|in_list[inversionista,desarrollador]',
+                'correo_electronico' => 'required|valid_email|is_unique[Usuario.correo_electronico]',
+                'fecha_nacimiento'   => 'required|valid_date' 
     ];
 
         if (!$this->validate($rules)) {

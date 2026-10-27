@@ -8,7 +8,6 @@ class UserModel extends Model {
     protected $primaryKey    = 'id';
     protected $returnType    = 'array';
     protected $allowedFields = ['alias', 'nombre', 'apellido', 'contraseña', 'tipo', 'correo_electronico', 'fecha_nacimiento'];
-    protected $useTimestamps = true;
     protected $validationMessages = [
         'alias' => [
             'is_unique' => 'Este nombre de usuario (alias) ya está registrado.'
