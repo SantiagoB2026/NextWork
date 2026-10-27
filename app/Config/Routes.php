@@ -24,5 +24,6 @@ $routes->group('desarrollador', ['filter' => 'isDesarrollador'], function($route
     $routes->get('crear-proyecto', 'Proyectos::crear');
     $routes->post('guardar-proyecto', 'Proyectos::guardar');
 });
-
+$routes->get('perfil', 'Perfil::index');
+$routes->get('perfil/(:num)', 'Perfil::index/$1');
 
