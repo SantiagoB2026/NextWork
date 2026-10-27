@@ -354,20 +354,23 @@
 
     <div class="ew-cover"></div>
 
-    <section class="ew-profile-info">
-      <div class="ew-avatar" id="ewAvatar">N</div>
+    <div class="ew-avatar" id="ewAvatar">
+      <?= esc(mb_strtoupper(mb_substr($_SESSION['name'] ?? '', 0, 1))) ?>
+    </div>
 
       <div class="ew-creator">
-        <h1 id="alias"><span> <?= esc(strtok(session()->get('alias') ?? '', ' ')) ?>!!!</span>
-          <span class="ew-verified" title="Creador">✓</span>
+        <h1 id="alias"><span> <?= esc(strtok(session()->get('name') ?? '', ' ')) ?></span>
         </h1>
         <div class="ew-handle" id="ewHandle"><span> <?= esc(strtok(session()->get('nombre, apellido') ?? '', ' ')) ?>!!!</span></div>
       </div>
 
       <div class="ew-actions">
-        <button class="ew-btn" id="ewFollow" onclick="ewToggleFollow()">
-          + Seguir
-        </button>
+<?php if ($id_usuario_logueado !== $id_cuenta_visitada): ?>
+    <button class="ew-btn" id="ewFollow" onclick="ewToggleFollow()">
+        + Seguir
+    </button>
+<?php endif; ?>
+
         <button class="ew-btn ew-btn-outline" onclick="ewShare()">
           Compartir ↗
         </button>
@@ -388,15 +391,15 @@
 
     <section class="ew-stats">
       <div class="ew-stat">
-        <strong id="ewFollowers">1.240</strong>
+        <strong id="ewFollowers">0</strong>
         <span>Seguidores</span>
       </div>
       <div class="ew-stat">
-        <strong>12</strong>
+        <strong>0</strong>
         <span>Proyectos publicados</span>
       </div>
       <div class="ew-stat">
-        <strong>$8.450</strong>
+        <strong>$0</strong>
         <span>Fondos recaudados</span>
       </div>
     </section>
@@ -404,7 +407,7 @@
     <section id="ewProjects">
       <div class="ew-section-title">
         <h2>Proyectos del creador</h2>
-        <span class="ew-project-count">Ideas que buscan hacerse realidad</span>
+
       </div>
 
       <div class="ew-tabs">
@@ -413,6 +416,41 @@
         <button class="ew-tab" onclick="ewFilter('soon',this)">Próximamente</button>
         <button class="ew-tab" onclick="ewFilter('finished',this)">Finalizados</button>
       </div>
+<!-- Botón que solo ve el dueño del perfil -->
+<?php if ($id_usuario_logueado === $id_cuenta_visitada): ?>
+    <div style="margin: 20px 0;">
+        <h2>Mis Proyectos</h2>
+        <button type="button" onclick="document.getElementById('formProyecto').style.display='block'" class="ew-btn">
+            + Crear Nuevo Proyecto
+        </button>
+    </div>
+
+    <!-- Formulario oculto que aparece al dar click -->
+    <div id="formProyecto" style="display:none; border: 1px solid #ccc; padding: 20px; border-radius: 8px; margin-top: 15px;">
+        <h3>Nuevo Proyecto</h3>
+        <form action="<?= base_url('perfil/guardarProyecto') ?>" method="POST">
+            <?= csrf_field() ?>
+
+            <div style="margin-bottom: 10px;">
+                <label>Título:</label><br>
+                <input type="text" name="titulo" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label>Descripción:</label><br>
+                <textarea name="descripcion" required style="width: 100%; padding: 8px; height: 100px;"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label>Dinero a conseguir ($):</label><br>
+                <input type="number" name="dinero_objetivo" step="0.01" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <button type="submit" class="ew-btn">Guardar Proyecto</button>
+            <button type="button" onclick="document.getElementById('formProyecto').style.display='none'">Cancelar</button>
+        </form>
+    </div>
+<?php endif; ?>
 
       <div class="ew-grid" id="ewGrid"></div>
       <div class="ew-empty" id="ewEmpty" hidden>
@@ -422,162 +460,10 @@
 
   </div>
 </main>
+
+
 <?= view('templates/footer') ?>
 
-<script>
-const ewProjects = [
-  {
-    title: "Reinos Olvidados",
-    category: "Videojuegos",
-    status: "live",
-    badge: "En financiación",
-    description: "Un universo medieval lleno de aventuras, misterios y posibilidades.",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80",
-    raised: 6800,
-    goal: 10000,
-    supporters: 124
-  },
-  {
-    title: "Proyecto Eclipse",
-    category: "Cine y audiovisual",
-    status: "soon",
-    badge: "Próximamente",
-    description: "Una nueva producción independiente en fase de preparación.",
-    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80",
-    raised: 0,
-    goal: 5000,
-    supporters: 0
-  },
-  {
-    title: "Mundos Creativos",
-    category: "Arte y diseño",
-    status: "finished",
-    badge: "Finalizado",
-    description: "Una colección de herramientas y recursos para creadores digitales.",
-    image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=900&q=80",
-    raised: 4000,
-    goal: 4000,
-    supporters: 87
-  }
-];
 
-const ewMoney = n => "$" + n.toLocaleString("es-AR");
-
-function ewRender(filter = "all") {
-  const grid = document.getElementById("ewGrid");
-  const empty = document.getElementById("ewEmpty");
-  grid.replaceChildren();
-
-  const list = ewProjects.filter(p =>
-    filter === "all" || p.status === filter
-  );
-
-  empty.hidden = list.length > 0;
-
-  list.forEach(p => {
-    const percent = Math.min(100, Math.round(p.raised / p.goal * 100));
-
-    const card = document.createElement("article");
-    card.className = "ew-card";
-
-    const imageBox = document.createElement("div");
-    imageBox.className = "ew-project-img";
-
-    const img = document.createElement("img");
-    img.src = p.image;
-    img.alt = p.title;
-    img.loading = "lazy";
-
-    const badge = document.createElement("span");
-    badge.className = "ew-badge";
-    badge.textContent = p.badge;
-    imageBox.append(img, badge);
-
-    const content = document.createElement("div");
-    content.className = "ew-card-content";
-
-    const category = document.createElement("div");
-    category.className = "ew-category";
-    category.textContent = p.category;
-
-    const title = document.createElement("h3");
-    title.textContent = p.title;
-
-    const desc = document.createElement("p");
-    desc.className = "ew-description";
-    desc.textContent = p.description;
-
-    const progress = document.createElement("div");
-    progress.className = "ew-progress";
-
-    const fill = document.createElement("div");
-    fill.style.width = percent + "%";
-    progress.append(fill);
-
-    const info = document.createElement("div");
-    info.className = "ew-progress-info";
-
-    const amount = document.createElement("strong");
-    amount.textContent = ewMoney(p.raised);
-
-    const goal = document.createElement("span");
-    goal.textContent = percent + "% de " + ewMoney(p.goal);
-
-    info.append(amount, goal);
-
-    const footer = document.createElement("div");
-    footer.className = "ew-project-footer";
-    footer.textContent = p.supporters + " personas apoyan este proyecto";
-
-    content.append(category, title, desc, progress, info, footer);
-    card.append(imageBox, content);
-    grid.append(card);
-  });
-}
-
-function ewFilter(filter, button) {
-  document.querySelectorAll(".ew-tab").forEach(tab =>
-    tab.classList.remove("active")
-  );
-  button.classList.add("active");
-  ewRender(filter);
-}
-
-let ewFollowing = false;
-let ewFollowers = 1240;
-
-function ewToggleFollow() {
-  ewFollowing = !ewFollowing;
-  ewFollowers += ewFollowing ? 1 : -1;
-
-  document.getElementById("ewFollow").textContent =
-    ewFollowing ? "✓ Siguiendo" : "+ Seguir";
-
-  document.getElementById("ewFollowers").textContent =
-    ewFollowers.toLocaleString("es-AR");
-}
-
-async function ewShare() {
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: document.getElementById("ewName").textContent,
-        url: location.href
-      });
-    } else if (navigator.clipboard) {
-      await navigator.clipboard.writeText(location.href);
-      alert("Enlace copiado.");
-    } else {
-      alert("Copiá el enlace desde la barra del navegador.");
-    }
-  } catch (error) {
-    if (error.name !== "AbortError") {
-      alert("No se pudo compartir el enlace.");
-    }
-  }
-}
-
-ewRender();
-</script>
 <!-- FIN DEL PERFIL EXTWORK -->
 

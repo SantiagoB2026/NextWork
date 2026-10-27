@@ -1,25 +1,33 @@
 <?php
-// Cambiado de "app" a "App" con mayúscula
 namespace App\Controllers; 
 
 class Perfil extends BaseController
 {
-    public function index()
+    public function index($id_perfil_visitado = null)
     {
-        // 1. Cargamos la sesión para poder usar los datos del usuario logueado
         $session = session();
         
-        // 2. Preparamos los datos orientados a la vista
+        // Si no viene ningún ID en la URL, usamos el de la sesión
+        if ($id_perfil_visitado === null) {
+            $id_perfil_visitado = $session->get('user_id');
+        }
+
+        // Armamos los datos usando puramente lo que está en la sesión
         $data = [
-            'nombre'    => $session->get('name'),
-            'apellido'  => $session->get('last_name'),
-            'email'     => $session->get('email'),
-            'fecha_nacimiento' => $session->get('fecha_nacimiento'),
-            'tipo'       => $session->get('tipo')
+            'id_usuario_logueado' => $session->get('user_id'),
+            'id_cuenta_visitada'  => $id_perfil_visitado,
+            
+            // Evaluamos si está viendo su propio perfil
+            'es_el_propio_perfil' => ($session->get('user_id') == $id_perfil_visitado),
+
+            // Traemos el alias de la sesión (si no existe, usa el name como respaldo)
+            'alias'    => $session->get('alias') ?? $session->get('name') ?? 'Sin Alias',
+            'nombre'   => $session->get('name'),
+            'apellido' => $session->get('last_name'),
+            'email'    => $session->get('email'),
+            'tipo'     => $session->get('tipo')
         ];
         
-        // 3. Retornamos la vista enviándole el arreglo de datos
-        // Asegurate de que el archivo exista en: app/Views/perfil/mi_cuenta_view.php
         return view('perfil/mi_cuenta_view', $data);
     }
 }
