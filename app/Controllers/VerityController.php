@@ -9,7 +9,7 @@ class Dashboard extends BaseController
 {
     public function index(){
         $session   = session();
-        $idUsuario = $session->get('id');
+        $idUsuario = $session->get('id_usuario');
         $tipo      = $session->get('tipo');
 
         // 2. Verificar según el tipo si ya completó su perfil adicional

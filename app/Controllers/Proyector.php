@@ -8,13 +8,13 @@ class Proyecto extends BaseController
         $session = session();
         
         // 1. Seguridad: Verificar sesión activa
-        if (!$session->has('user_id')) {
+        if (!$session->has('id_usuario')) {
             return redirect()->to('/login');
         }
 
         // 2. Recolectar datos del formulario
         $dataProyecto = [
-            'usuario_id'      => $session->get('user_id'),
+            'id_usuario'      => $session->get('id_usuario'),
             'titulo'          => $this->request->getPost('titulo'),
             'descripcion'     => $this->request->getPost('descripcion'),
             'dinero_objetivo' => $this->request->getPost('dinero_objetivo')

@@ -355,13 +355,19 @@
     <div class="ew-cover"></div>
 
     <div class="ew-avatar" id="ewAvatar">
-      <?= esc(mb_strtoupper(mb_substr($_SESSION['name'] ?? '', 0, 1))) ?>
+      <!-- Ahora usa la variable $alias que viene limpia del controlador -->
+      <?= esc(mb_strtoupper(mb_substr($alias ?? '', 0, 1))) ?>
     </div>
 
       <div class="ew-creator">
-        <h1 id="alias"><span> <?= esc(strtok(session()->get('name') ?? '', ' ')) ?></span>
+        <h1 id="alias">
+          <!-- Muestra el alias procesado (o el nombre como respaldo si no había alias) -->
+          <span><?= esc($alias) ?></span>
         </h1>
-        <div class="ew-handle" id="ewHandle"><span> <?= esc(strtok(session()->get('nombre, apellido') ?? '', ' ')) ?>!!!</span></div>
+        <div class="ew-handle" id="ewHandle">
+          <!-- Saludo con el primer nombre -->
+          <span><?= esc(strtok($nombre ?? '', ' ')) ?>!!!</span>
+        </div>
       </div>
 
       <div class="ew-actions">
@@ -460,7 +466,6 @@
 
   </div>
 </main>
-
 
 <?= view('templates/footer') ?>
 

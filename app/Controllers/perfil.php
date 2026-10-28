@@ -6,26 +6,38 @@ class Perfil extends BaseController
     public function index($id_perfil_visitado = null)
     {
         $session = session();
+        $db = \Config\Database::connect();
         
-        // Si no viene ningún ID en la URL, usamos el de la sesión
+        // CORREGIDO: Tu sesión guarda el ID en la clave 'id'
         if ($id_perfil_visitado === null) {
-            $id_perfil_visitado = $session->get('user_id');
+            $id_perfil_visitado = $session->get('id');
         }
 
-        // Armamos los datos usando puramente lo que está en la sesión
-        $data = [
-            'id_usuario_logueado' => $session->get('user_id'),
-            'id_cuenta_visitada'  => $id_perfil_visitado,
-            
-            // Evaluamos si está viendo su propio perfil
-            'es_el_propio_perfil' => ($session->get('user_id') == $id_perfil_visitado),
+        // Buscamos los datos en la base de datos usando tu ID correcto (el 9)
+        $usuarioDb = $db->table('usuario')
+                        ->where('id_usuario', $id_perfil_visitado)
+                        ->get()
+                        ->getRowArray();
 
-            // Traemos el alias de la sesión (si no existe, usa el name como respaldo)
-            'alias'    => $session->get('alias') ?? $session->get('name') ?? 'Sin Alias',
-            'nombre'   => $session->get('name'),
-            'apellido' => $session->get('last_name'),
-            'email'    => $session->get('email'),
-            'tipo'     => $session->get('tipo')
+        // Si por alguna razón la consulta falla, dejamos un plan B para que no rompa
+        if (!$usuarioDb) {
+            $usuarioDb = [
+                'alias'    => 'Sin Alias',
+                'nombre'   => $session->get('name') ?? 'Usuario',
+                'apellido' => ''
+            ];
+        }
+        $data = [
+            'id_usuario_logueado' => $session->get('id'), 
+            'id_cuenta_visitada'  => $id_perfil_visitado,
+            'es_el_propio_perfil' => ($session->get('id') == $id_perfil_visitado),
+            
+            
+            'alias'               => $usuarioDb['alias'] ?? 'Sin Alias', 
+            'nombre'              => $usuarioDb['nombre'], 
+            'apellido'            => $usuarioDb['apellido'], 
+            'email'               => $session->get('email'), 
+            'tipo'                => $session->get('tipo') 
         ];
         
         return view('perfil/mi_cuenta_view', $data);
