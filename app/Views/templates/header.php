@@ -34,8 +34,6 @@
             <input type="text" name="query" class="search-input" placeholder="Search" autocomplete="off" aria-label="Buscar">
             <button type="submit" class="search-button" aria-label="Buscar"></button>
         </form>
-
-
         <!-- Grupo de Botones / Control de sesión PHP -->
         <div class="button-group">
             <?php if (session()->get('isLoggedIn')): ?>

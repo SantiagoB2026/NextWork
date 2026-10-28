@@ -10,7 +10,7 @@ class Perfil extends BaseController
         
         // CORREGIDO: Tu sesión guarda el ID en la clave 'id'
         if ($id_perfil_visitado === null) {
-            $id_perfil_visitado = $session->get('id_usuario');
+            $id_perfil_visitado = $session->get('id');
         }
 
         // Buscamos los datos en la base de datos usando tu ID correcto (el 9)

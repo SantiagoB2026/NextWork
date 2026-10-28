@@ -26,4 +26,5 @@ $routes->group('desarrollador', ['filter' => 'isDesarrollador'], function($route
 });
 $routes->get('perfil', 'Perfil::index');
 $routes->get('perfil/(:num)', 'Perfil::index/$1');
+$routes->get('search/results', 'Buscar::index');
 

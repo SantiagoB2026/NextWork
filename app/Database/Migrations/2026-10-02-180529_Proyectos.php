@@ -11,6 +11,7 @@ class Proyectos extends Migration
     $this->forge->addField([
         'id_proyecto'    =>['type' => 'INT','unsigned' => true, 'auto_increment' => true],
         'autor' => ['type' => 'VARCHAR', 'constraint' => 15,'null' => false],
+        'titulo' =>['type' => 'VARCHAR', 'constraint' => 15,'null' => false],
         'descripcion' => ['type' => 'VARCHAR', 'constraint' => 500],
         'etiqueta' => ['type' => 'VARCHAR', 'constraint' => 15],
         'fecha_publicacion' => ['type' => 'DATE','null' => false],
