@@ -13,7 +13,7 @@ class Usuarios extends Migration
         'alias' => ['type' => 'VARCHAR', 'constraint' => 15,'null' => false],
         'nombre' => ['type' => 'VARCHAR', 'constraint' => 50],
         'apellido' => ['type' => 'VARCHAR', 'constraint' => 50],
-        'contraseña' => ['type' => 'VARCHAR', 'constraint' => 100,'null' => false],
+        'contrasena' => ['type' => 'VARCHAR', 'constraint' => 100,'null' => false],
         'correo_electronico' => ['type' => 'VARCHAR','constraint' =>100, 'null' => false],
         'fecha_nacimiento' => ['type' => 'DATE','null' => false],
         'tipo' => ['type' => 'VARCHAR ','constraint' => 15,'null' => false],
@@ -21,7 +21,7 @@ class Usuarios extends Migration
         'updated_at' => ['type' => 'DATETIME', 'null' => true],
 
     ]);
-    $this->forge->addKey('id', true);
+    $this->forge->addKey('id_usuario', true);
     $this->forge->createTable('Usuario');
     }
 

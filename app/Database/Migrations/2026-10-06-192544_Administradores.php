@@ -9,18 +9,21 @@ class Administradores extends Migration
     public function up()
     {
         $this->forge->addField([
-            // Vinculamos al admin con su cuenta base de Usuario
-            'id_usuario' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-                'unsigned'   => true,
+            'id_administrador' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'auto_increment' => true, // CORREGIDO: El autoincremento va en el ID de esta tabla
             ],
-            // Un campo clásico por si manejan niveles de admin (ej: superadmin, moderador)
             'nivel_permiso' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 50,
                 'default'    => 'moderador',
                 'null'       => false,
+            ],
+            'id_usuario' => [
+                'type'     => 'INT',
+                'unsigned' => true, // CORREGIDO: Se eliminó el auto_increment de aquí
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -32,11 +35,11 @@ class Administradores extends Migration
             ],
         ]);
 
-        // Seteamos la Clave Primaria
-        $this->forge->addKey('id_usuario', true);
+        // CORREGIDO: Cambiado 'id_inversionista' por 'id_administrador'
+        $this->forge->addKey('id_administrador', true);
 
-        // Relación directa de Clave Foránea con Usuarios
-        $this->forge->addForeignKey('id_usuario', 'Usuario', 'id', 'CASCADE', 'CASCADE');
+        // CORREGIDO: Cambiado el destino 'id' por 'id_usuario'
+        $this->forge->addForeignKey('id_usuario', 'Usuario', 'id_usuario', 'CASCADE', 'CASCADE');
 
         // Creamos la tabla definitiva
         $this->forge->createTable('Administradores');

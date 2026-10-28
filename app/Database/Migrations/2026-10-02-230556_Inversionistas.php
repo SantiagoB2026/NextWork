@@ -9,11 +9,11 @@ class Inversionistas extends Migration
     public function up()
     {
         $this->forge->addField([
-            // Este ID vincula al inversionista con su cuenta en la tabla Usuario
-            'id_usuario' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-                'unsigned'   => true,
+            'id_inversionista' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'auto_increment' => true, // CORREGIDO: El autoincremento va en la llave primaria real
             ],
             'donacion_total' => [
                 'type'       => 'DECIMAL',
@@ -27,6 +27,10 @@ class Inversionistas extends Migration
                 'default'    => 0.00,
                 'null'       => false,
             ],
+            'id_usuario' => [
+                'type'     => 'INT',
+                'unsigned' => true, // CORREGIDO: Se eliminó el auto_increment de aquí
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
@@ -37,11 +41,11 @@ class Inversionistas extends Migration
             ],
         ]);
 
-        // Definimos la Clave Primaria sobre id_usuario
-        $this->forge->addKey('id_usuario', true);
+        // Definimos la Clave Primaria
+        $this->forge->addKey('id_inversionista', true);
 
-        // Creamos la relación de Clave Foránea con la tabla Usuario
-        $this->forge->addForeignKey('id_usuario', 'Usuario', 'id', 'CASCADE', 'CASCADE');
+        // CORREGIDO: Cambiado 'id' por 'id_usuario' como tercer parámetro
+        $this->forge->addForeignKey('id_usuario', 'Usuario', 'id_usuario', 'CASCADE', 'CASCADE');
 
         // Creamos la tabla física
         $this->forge->createTable('Inversionistas');

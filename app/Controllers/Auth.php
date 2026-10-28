@@ -20,7 +20,7 @@ class Auth extends BaseController
                 'alias'=> 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[Usuario.alias]',
                 'nombre'             => 'required|max_length[50]',
                 'apellido'           => 'required|max_length[50]',
-                'contraseña'         => 'required',
+                'contrasena'         => 'required',
                 'tipo'               => 'required|in_list[inversionista,desarrollador]',
                 'correo_electronico' => 'required|valid_email|is_unique[Usuario.correo_electronico]',
                 'fecha_nacimiento'   => 'required|valid_date' 
@@ -39,7 +39,7 @@ class Auth extends BaseController
             'apellido'           => $this->request->getPost('apellido'),
             'correo_electronico' => $this->request->getPost('correo_electronico'),
             'fecha_nacimiento'   => $this->request->getPost('fecha_nacimiento'),
-            'contraseña'         => password_hash($this->request->getPost('contraseña'), PASSWORD_DEFAULT),
+            'contrasena'         => password_hash($this->request->getPost('contrasena'), PASSWORD_DEFAULT),
             'tipo' => $this->request->getPost('tipo')
     
             // Nota: Si agregás 'role' a tu BD, recordá ponerlo también en $allowedFields en tu UserModel
@@ -69,12 +69,12 @@ class Auth extends BaseController
 
         
         $email    = $this->request->getPost('correo_electronico');
-        $password = $this->request->getPost('contraseña');
+        $password = $this->request->getPost('contrasena');
 
        
         $user = $userModel->where('correo_electronico', $email)->first();
 
-        if ($user && password_verify($password, $user['contraseña'])) {
+        if ($user && password_verify($password, $user['contrasena'])) {
 
             session()->set([
                 'id'         => $user['id_usuario'],
@@ -86,7 +86,7 @@ class Auth extends BaseController
              return redirect()->to('/');
         }
 
-        return redirect()->back()->withInput()->with('errores', ['login' => 'Correo o contraseña incorrectos.']);
+        return redirect()->back()->withInput()->with('errores', ['login' => 'Correo o contrasena incorrectos.']);
     }
     public function logout()
     {
