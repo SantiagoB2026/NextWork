@@ -9,7 +9,7 @@ class Usuarios extends Migration
     public function up()
     {
     $this->forge->addField([
-        'id'    =>['type' => 'INT','unsigned' => true, 'auto_increment' => true],
+        'id_usuario'    =>['type' => 'INT','unsigned' => true, 'auto_increment' => true],
         'alias' => ['type' => 'VARCHAR', 'constraint' => 15,'null' => false],
         'nombre' => ['type' => 'VARCHAR', 'constraint' => 50],
         'apellido' => ['type' => 'VARCHAR', 'constraint' => 50],
