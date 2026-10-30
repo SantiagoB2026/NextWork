@@ -30,13 +30,13 @@
   <!-- 2. Contenedor de las imágenes que se van a mover -->
   <div class="carousel-inner-css">
     <div class="carousel-item-css">
-      <img src="../assets/img/idea.png" class="img-slide" alt="Slide 1">
+      <img src="../assets/img/1.png" class="img-slide" alt="Slide 1">
     </div>
     <div class="carousel-item-css">
-      <img src="../assets/img/idea.png" class="img-slide" alt="Slide 2">
+      <img src="../assets/img/2.png" class="img-slide" alt="Slide 2">
     </div>
     <div class="carousel-item-css">
-      <img src="..." class="img-slide" alt="Slide 3">
+      <img src="../assets/img/3.png" class="img-slide" alt="Slide 3">
     </div>
   </div>
 

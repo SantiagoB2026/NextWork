@@ -1,6 +1,9 @@
 <?= view('templates/header') ?>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 <style>
 /* Contenedor principal que centra el formulario en un espacio limpio y blanco */
 .registration-page-wrapper {
@@ -14,25 +17,53 @@
     background-color: #ffffff;
 }
 
+<<<<<<< HEAD
 
 .registration-page-wrapper *,
 .registration-page-wrapper *::before,
+=======
+.registration-page-wrapper *, 
+.registration-page-wrapper *::before, 
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 .registration-page-wrapper *::after {
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Contenedor minimalista sin cajas pesadas ni sombras oscuras */
 .registration-container {
     width: 100%;
     max-width: 420px; /* Tamaño estilizado y compacto */
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Encabezado y Título */
 .register-header {
     margin-bottom: 40px;
     text-align: center;
+<<<<<<< HEAD
+=======
+}
+
+.card-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
+}
+
+.register-subtitle {
+    font-size: 13.5px;
+    color: #666666;
+    margin: 0;
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 }
 
 
@@ -67,7 +98,10 @@
     gap: 16px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 @media (max-width: 576px) {
     .form-row-2col {
         grid-template-columns: 1fr;
@@ -75,7 +109,10 @@
     }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Etiquetas (Labels) en mayúsculas sutiles */
 .form-label {
     display: block;
@@ -87,7 +124,10 @@
     letter-spacing: 0.5px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Entradas de Texto Premium Minimalistas */
 .form-input {
     width: 100%;
@@ -108,13 +148,19 @@
     border-color: #000000;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Corrección visual para el selector de fecha en modo claro */
 input[type="date"].form-input {
     color: #000000;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Contenedor del campo de contraseña */
 .password-input-wrapper {
     display: flex;
@@ -127,7 +173,10 @@ input[type="date"].form-input {
     padding-right: 75px; /* Espacio para que el texto no pise el botón */
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Botón "Mostrar" integrado de forma invisible a la derecha */
 .btn-toggle-password {
     position: absolute;
@@ -151,7 +200,10 @@ input[type="date"].form-input {
     color: #000000;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* --- Selector de Rol Unificado y Minimalista --- */
 .role-selector-container {
     display: flex;
@@ -162,12 +214,18 @@ input[type="date"].form-input {
     background-color: #fafafa;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 .radio-hidden {
     display: none;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 .role-btn-label {
     flex: 1;
     text-align: center;
@@ -181,12 +239,18 @@ input[type="date"].form-input {
     user-select: none;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 .role-btn-label:not(:last-child) {
     border-right: 1px solid #eaeaea;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* CUANDO ESTÁ SELECCIONADO: Cambio limpio a Negro y Verde Corporativo */
 .radio-hidden:checked + .role-btn-label {
     background-color: #00c774; /* Verde Nextwork */
@@ -194,7 +258,10 @@ input[type="date"].form-input {
     font-weight: 600;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Botón de Enviar Registrar Minimalista */
 .form-actions {
     margin-top: 28px;
@@ -219,7 +286,10 @@ input[type="date"].form-input {
     opacity: 0.9;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 /* Alertas de error limpias */
 .error-alert {
     background-color: #fef2f2;
@@ -251,14 +321,20 @@ input[type="date"].form-input {
     text-decoration: none;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 .login-redirect-link span {
     color: #000000;
     font-weight: 500;
     border-bottom: 1px solid #000000;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 .login-redirect-link:hover span {
     color: #00c774;
     border-bottom-color: #00c774;
@@ -268,12 +344,19 @@ input[type="date"].form-input {
 
 <div class="registration-page-wrapper">
     <div class="registration-container">
+<<<<<<< HEAD
        
+=======
+        
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
         <div class="register-header">
             <h3 class="card-title">Registro de Usuario</h3>
             <p class="register-subtitle">Ingresá tus datos para empezar en Nextwork.</p>
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 
         <?php if (session()->getFlashdata('errores')): ?>
             <div class="error-alert">
@@ -289,13 +372,19 @@ input[type="date"].form-input {
         <form action="register" method="post" class="registration-form">
             <?= csrf_field() ?>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
             <div class="form-group">
                 <label for="alias" class="form-label">Nombre de Usuario (Alias)</label>
                 <input type="text" id="alias" name="alias" class="form-input" required value="<?= old('alias') ?>">
             </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
             <!-- Fila de dos columnas nativa para Nombre y Apellido -->
             <div class="form-row-2col">
                 <div class="form-group">
@@ -329,14 +418,21 @@ input[type="date"].form-input {
                 </div>
             </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
             <!-- Selector de Rol - Vacio por defecto -->
             <div class="form-group">
                 <label class="form-label">Selecciona tu Rol</label>
                 <div class="role-selector-container">
                     <input type="radio" class="radio-hidden" name="tipo" id="rol_inversionista" value="inversionista" required <?= old('tipo') == 'inversionista' ? 'checked' : '' ?>>
                     <label class="role-btn-label" for="rol_inversionista">Inversionista</label>
+<<<<<<< HEAD
                    
+=======
+                    
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
                     <input type="radio" class="radio-hidden" name="tipo" id="rol_desarrollador" value="desarrollador" <?= old('tipo') == 'desarrollador' ? 'checked' : '' ?>>
                     <label class="role-btn-label" for="rol_desarrollador">Desarrollador</label>
                 </div>
@@ -353,23 +449,37 @@ input[type="date"].form-input {
             <a href="login" class="login-redirect-link">¿Ya tienes una cuenta? <span>Inicia sesión</span></a>
         </div>
 
+<<<<<<< HEAD
 
     </div>
 </div>
 
 
+=======
+    </div>
+</div>
+
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
 <script>
 document.getElementById('btnTogglePassword').addEventListener('click', function () {
     const passwordField = document.getElementById('contraseña');
     const isPassword = passwordField.getAttribute('type') === 'password';
+<<<<<<< HEAD
    
+=======
+    
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
     passwordField.setAttribute('type', isPassword ? 'text' : 'password');
     this.textContent = isPassword ? 'Ocultar' : 'Mostrar';
 });
 </script>
 
+<<<<<<< HEAD
 
 <?= view('templates/footer') ?>
 
 
 
+=======
+<?= view('templates/footer') ?>
+>>>>>>> 4ed7080bf701aa57d3d755a39201d214068d1dee
