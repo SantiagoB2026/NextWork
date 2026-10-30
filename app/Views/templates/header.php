@@ -11,6 +11,7 @@
         <!-- ESTILOS INTERNOS (Para evitar problemas de rutas de carpetas) -->
         <link rel="stylesheet" href="../assets/css/todo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
     </head>
     <body>
 

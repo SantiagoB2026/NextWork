@@ -23,7 +23,7 @@ class Home extends BaseController {
  }
  
     public function guardar(){
-        $datos = $this->request->getPost(['alias', 'nombre', 'apellido', 'contrasena', 'tipo' , 'fecha_nacimiento', 'correo_eletronico']);
+        $datos = $this->request->getPost(['alias', 'nombre', 'apellido', 'contraseña', 'tipo' , 'fecha_nacimiento', 'correo_eletronico']);
     if (! $this->Usuarios->insert($datos)) {
         return redirect()->back()->withInput()
             ->with('errores', $this->Usuarios->errors());
@@ -38,7 +38,7 @@ class Home extends BaseController {
         public function actualizar(int $id)
  {
             $this->buscar($id);
-        $datos = $this->request->getPost(['alias', 'nombre', 'apellido', 'contrasena', 'tipo' , 'fecha_nacimiento', 'correo_eletronico']);
+        $datos = $this->request->getPost(['alias', 'nombre', 'apellido', 'contraseña', 'tipo' , 'fecha_nacimiento', 'correo_eletronico']);
         if (! $this->Usuarios->update($id, $datos)) {
             return redirect()->back()->withInput()
                 ->with('errores', $this->productos->errors());
