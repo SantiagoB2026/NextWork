@@ -31,3 +31,4 @@ $routes->get('search/results', 'Buscar::index');
 $routes->get('/', 'Home::index', ['filter' => 'redirectIfAuth']);
 $routes->get('login', 'Auth::login', ['filter' => 'redirectIfAuth']);
 
+$routes->post('proyectos/guardar', 'ProyectosController::guardar');

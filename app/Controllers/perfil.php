@@ -14,7 +14,7 @@ class Perfil extends BaseController
         }
 
         // Buscamos los datos en la base de datos usando tu ID correcto (el 9)
-        $usuarioDb = $db->table('usuario')
+        $usuarioDb = $db->table('Usuario')
                         ->where('id_usuario', $id_perfil_visitado)
                         ->get()
                         ->getRowArray();

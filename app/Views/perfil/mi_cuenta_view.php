@@ -434,28 +434,58 @@
     <!-- Formulario oculto que aparece al dar click -->
     <div id="formProyecto" style="display:none; border: 1px solid #ccc; padding: 20px; border-radius: 8px; margin-top: 15px;">
         <h3>Nuevo Proyecto</h3>
-        <form action="<?= base_url('perfil/guardarProyecto') ?>" method="POST">
-            <?= csrf_field() ?>
+        <!-- El action ahora apunta a la ruta correcta que procesará tu controlador -->
+<form action="<?= base_url('perfil/guardarProyecto') ?>" method="POST" id="formProyecto">
+    <?= csrf_field() ?>
 
-            <div style="margin-bottom: 10px;">
-                <label>Título:</label><br>
-                <input type="text" name="titulo" required style="width: 100%; padding: 8px;">
-            </div>
+    <!-- Bloque para mostrar errores si la base de datos o validación fallan -->
+    <?php if (session()->getFlashdata('error')): ?>
+        <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-            <div style="margin-bottom: 10px;">
-                <label>Descripción:</label><br>
-                <textarea name="descripcion" required style="width: 100%; padding: 8px; height: 100px;"></textarea>
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label>Dinero a conseguir ($):</label><br>
-                <input type="number" name="dinero_objetivo" step="0.01" required style="width: 100%; padding: 8px;">
-            </div>
-
-            <button type="submit" class="ew-btn">Guardar Proyecto</button>
-            <button type="button" onclick="document.getElementById('formProyecto').style.display='none'">Cancelar</button>
-        </form>
+    <div style="margin-bottom: 15px;">
+        <label for="titulo" style="font-weight: bold;">Título del Proyecto:</label>
+        <input type="text" 
+               id="titulo"
+               name="titulo" 
+               value="<?= old('titulo') ?>" 
+               required 
+               maxlength="15" 
+               style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
     </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="descripcion" style="font-weight: bold;">Descripción:</label>
+        <textarea id="descripcion"
+                  name="descripcion" 
+                  required 
+                  maxlength="500" 
+                  style="width: 100%; padding: 8px; height: 120px; margin-top: 5px; box-sizing: border-box; resize: vertical;"><?= old('descripcion') ?></textarea>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <label for="dinero_objetivo" style="font-weight: bold;">Dinero a conseguir ($):</label>
+        <input type="number" 
+               id="dinero_objetivo"
+               name="dinero_objetivo" 
+               value="<?= old('dinero_objetivo') ?>" 
+               min="1" 
+               required 
+               style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+        <button type="submit" class="ew-btn">Guardar Proyecto</button>
+        <button type="button" 
+                onclick="document.getElementById('formProyecto').style.display='none'" 
+                style="padding: 8px 15px; background-color: #6c757d; color: white; border: none; cursor: pointer; border-radius: 4px;">
+            Cancelar
+        </button>
+    </div>
+</form>
+
 <?php endif; ?>
 
       <div class="ew-grid" id="ewGrid"></div>

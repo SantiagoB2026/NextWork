@@ -4,7 +4,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class DeveloperModel extends UserModel {
-    protected $table         = 'Desarrollador';
+    protected $table         = 'inversionista';
     protected $primaryKey    = 'id_inversionista';
     protected $returnType    = 'array';
     protected $allowedFields = ['calificacion', 'preferencias'];

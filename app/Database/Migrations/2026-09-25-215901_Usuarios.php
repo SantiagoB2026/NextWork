@@ -13,7 +13,7 @@ class Usuarios extends Migration
         'alias' => ['type' => 'VARCHAR', 'constraint' => 15,'null' => false],
         'nombre' => ['type' => 'VARCHAR', 'constraint' => 50],
         'apellido' => ['type' => 'VARCHAR', 'constraint' => 50],
-        'contrasena' => ['type' => 'VARCHAR', 'constraint' => 100,'null' => false],
+        'contraseña' => ['type' => 'VARCHAR', 'constraint' => 100,'null' => false],
         'correo_electronico' => ['type' => 'VARCHAR','constraint' =>100, 'null' => false],
         'fecha_nacimiento' => ['type' => 'DATE','null' => false],
         'tipo' => ['type' => 'VARCHAR ','constraint' => 15,'null' => false],

@@ -15,6 +15,7 @@ class Proyectos extends Migration
         'descripcion' => ['type' => 'VARCHAR', 'constraint' => 500],
         'etiqueta' => ['type' => 'VARCHAR', 'constraint' => 15],
         'fecha_publicacion' => ['type' => 'DATE','null' => false],
+        'dinero_a_conseguir' => ['type' => 'BIGINT' ,'null' => false],
         'created_at' => ['type' => 'DATETIME', 'null' => true],
         'updated_at' => ['type' => 'DATETIME', 'null' => true],
 
