@@ -21,34 +21,48 @@
     <!-- Sección 1: Bloque Principal -->
     <section class="mockup-section">
         <h2 class="section-title">Haz tus proyectos realidad</h2>
-<div id="carouselExampleDark" class="carousel carousel-overlay slide" data-bs-theme="dark">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="10000">
-      <img src="../assets/img/idea.png" class="d-block w-100 rounded-5" alt="...">
+<div class="carrusel-contenedor">
+  <!-- 1. Controladores ocultos para saber en qué diapositiva estamos -->
+  <input type="radio" name="carrusel-grupo" id="slide-control-1" checked>
+  <input type="radio" name="carrusel-grupo" id="slide-control-2">
+  <input type="radio" name="carrusel-grupo" id="slide-control-3">
+
+  <!-- 2. Contenedor de las imágenes que se van a mover -->
+  <div class="carousel-inner-css">
+    <div class="carousel-item-css">
+      <img src="../assets/img/idea.png" class="img-slide" alt="Slide 1">
     </div>
-    <div class="carousel-item" data-bs-interval="2000">
-      <img src="../assets/img/idea.png" class="d-block w-100 rounded-5" alt="...">
+    <div class="carousel-item-css">
+      <img src="../assets/img/idea.png" class="img-slide" alt="Slide 2">
     </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100 rounded-5" alt="...">
+    <div class="carousel-item-css">
+      <img src="..." class="img-slide" alt="Slide 3">
     </div>
   </div>
-  <div class="carousel-overlay-controls">
-    <button class="btn-icon btn-sm btn-subtle theme-secondary" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-icon-prev" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+  <!-- 3. Flechas estáticas (cada par se muestra solo cuando corresponde) -->
+  <div class="carousel-arrows-static">
+    <!-- Flechas que aparecen cuando está activo el Slide 1 -->
+    <div class="arrows-set set-1">
+      <label for="slide-control-3" class="btn-flecha prev">&#10094;</label>
+      <label for="slide-control-2" class="btn-flecha next">&#10095;</label>
     </div>
-    <button class="btn-icon btn-sm btn-subtle theme-secondary" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-icon-next" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    
+    <!-- Flechas que aparecen cuando está activo el Slide 2 -->
+    <div class="arrows-set set-2">
+      <label for="slide-control-1" class="btn-flecha prev">&#10094;</label>
+      <label for="slide-control-3" class="btn-flecha next">&#10095;</label>
+    </div>
+
+    <!-- Flechas que aparecen cuando está activo el Slide 3 -->
+    <div class="arrows-set set-3">
+      <label for="slide-control-2" class="btn-flecha prev">&#10094;</label>
+      <label for="slide-control-1" class="btn-flecha next">&#10095;</label>
+    </div>
   </div>
 </div>
+
+
     </section>
 
     <!-- Sección 2: Bloque de Proyectos Destacados -->

@@ -755,3 +755,80 @@ background-color: red !important;
   .ew-stat strong { font-size: 21px; }
   .ew-stat span { font-size: 11px; }
 }
+
+/* Contenedor principal */
+.carrusel-contenedor {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Ocultamos los radio buttons para que no estorben visualmente */
+input[type="radio"] {
+  display: none;
+}
+
+/* El riel que contiene y desplaza las imágenes */
+.carousel-inner-css {
+  display: flex;
+  width: 300%; /* 100% por cada diapositiva (3 en total) */
+  transition: transform 0.5s ease-in-out; /* Animación de movimiento fluida */
+}
+
+/* Cada diapositiva ocupa exactamente el ancho del contenedor principal */
+.carousel-item-css {
+  width: 33.333%;
+  flex: 0 0 auto;
+}
+
+.img-slide {
+  width: 100%;
+  display: block;
+  border-radius: 2rem;
+}
+
+/* === LÓGICA DE MOVIMIENTO CON CSS === */
+#slide-control-1:checked ~ .carousel-inner-css { transform: translateX(0); }
+#slide-control-2:checked ~ .carousel-inner-css { transform: translateX(-33.333%); }
+#slide-control-3:checked ~ .carousel-inner-css { transform: translateX(-66.666%); }
+
+
+/* === CONTROLES ESTÁTICOS === */
+/* Ocultamos todos los sets de flechas por defecto */
+.arrows-set {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none; /* Evita que el contenedor invisible tape los clics */
+}
+
+/* Hacemos visibles únicamente las flechas del slide que esté seleccionado */
+#slide-control-1:checked ~ .carousel-arrows-static .set-1,
+#slide-control-2:checked ~ .carousel-arrows-static .set-2,
+#slide-control-3:checked ~ .carousel-arrows-static .set-3 {
+  display: block;
+}
+
+/* Estilo visual de las flechas (estilo overlay oscuro) */
+.btn-flecha {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 20px;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  pointer-events: auto; /* Reactiva los clics en los botones reales */
+  transition: background-color 0.2s ease;
+}
+
+.btn-flecha:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
