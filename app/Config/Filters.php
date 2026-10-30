@@ -16,6 +16,7 @@ use CodeIgniter\Filters\SecureHeaders;
 
 class Filters extends BaseFilters
 {
+  
     /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
@@ -37,7 +38,8 @@ class Filters extends BaseFilters
         'performance'   => PerformanceMetrics::class,
         'auth' => \App\Filters\AuthFilter::class,
         'isDesarrollador' => \App\Filters\DesarrolladorFilter::class,
-        'isInversionista' => \App\Filters\InversionistaFilter::class
+        'isInversionista' => \App\Filters\InversionistaFilter::class,
+          'redirectIfAuth' => \App\Filters\RedirectIfAuthenticated::class
 ];
 
 
