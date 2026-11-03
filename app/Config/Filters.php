@@ -16,6 +16,7 @@ use CodeIgniter\Filters\SecureHeaders;
 
 class Filters extends BaseFilters
 {
+  
     /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
@@ -25,20 +26,21 @@ class Filters extends BaseFilters
      * [filter_name => classname]
      * or [filter_name => [classname1, classname2, ...]]
      */
-    public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'cors'          => Cors::class,
-        'forcehttps'    => ForceHTTPS::class,
-        'pagecache'     => PageCache::class,
-        'performance'   => PerformanceMetrics::class,
-        'auth' => \App\Filters\AuthFilter::class,
+        public array $aliases = [
+        'csrf'            => CSRF::class,
+        'toolbar'         => DebugToolbar::class,
+        'honeypot'        => Honeypot::class,
+        'invalidchars'    => InvalidChars::class,
+        'secureheaders'   => SecureHeaders::class,
+        'cors'            => Cors::class,
+        'forcehttps'      => ForceHTTPS::class,
+        'pagecache'       => PageCache::class,
+        'performance'     => PerformanceMetrics::class,
+        'auth'            => \App\Filters\AuthFilter::class,
         'isDesarrollador' => \App\Filters\DesarrolladorFilter::class,
-        'isInversionista' => \App\Filters\InversionistaFilter::class
-];
+        'isInversionista' => \App\Filters\InversionistaFilter::class,
+        'redirectIfAuth'  => \App\Filters\FiltroAutentificacion::class
+    ];
 
 
     /**

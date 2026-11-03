@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 
 class DeveloperModel extends UserModel {
     protected $table         = 'Desarrollador';
-    protected $primaryKey    = 'id';
+    protected $primaryKey    = 'id_desarrollador';
     protected $returnType    = 'array';
     protected $allowedFields = ['calificacion', 'preferencias'];
     protected $useTimestamps = true;

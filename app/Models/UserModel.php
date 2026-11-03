@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 
 class UserModel extends Model {
     protected $table         = 'Usuario';
-    protected $primaryKey    = 'id';
+    protected $primaryKey    = 'id_usuario';
     protected $returnType    = 'array';
     protected $allowedFields = ['alias', 'nombre', 'apellido', 'contraseña', 'tipo', 'correo_electronico', 'fecha_nacimiento'];
     protected $validationMessages = [
