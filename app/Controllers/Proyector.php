@@ -1,30 +1,37 @@
 <?php
+
 namespace App\Controllers;
 
-class Proyecto extends BaseController
+use App\Models\ProyectoModel;
+
+class ProyectosController extends BaseController
 {
+    public function nuevo()
+    {
+        return view('nuevo_proyecto');
+    }
+
     public function guardar()
     {
-        $session = session();
-        
-        // 1. Seguridad: Verificar sesión activa
-        if (!$session->has('id_usuario')) {
-            return redirect()->to('/login');
-        }
+        $model = new ProyectoModel();
 
-        // 2. Recolectar datos del formulario
-        $dataProyecto = [
-            'id_usuario'      => $session->get('id_usuario'),
-            'titulo'          => $this->request->getPost('titulo'),
-            'descripcion'     => $this->request->getPost('descripcion'),
-            'dinero_objetivo' => $this->request->getPost('dinero_objetivo')
+        // 1. Recolectar datos del formulario y datos lógicos del sistema
+        $data = [
+            'titulo'            => $this->request->getPost('titulo'),
+            'descripcion'       => $this->request->getPost('descripcion'),
+            'dinero_conseguir'  => $this->request->getPost('dinero_conseguir'),
+            'fecha_publicacion' => date('Y-m-d'), // Fecha actual
+            'autor'             => 'Admin',       // Aquí pondrías el usuario logueado ej: session()->get('username')
+            'etiqueta'          => 'General'      // Valor por defecto o dinámico si añades un campo extra
         ];
 
-        // 3. Insertar en la Base de Datos
-        $db = \Config\Database::connect();
-        $db->table('proyectos')->insert($dataProyecto);
-
-        // 4. Redirigir de vuelta al PERFIL del usuario con un mensaje
-        return redirect()->to('/perfil')->with('success', 'Proyecto creado con éxito.');
+        // 2. Guardar en la Base de Datos
+        if ($model->insert($data)) {
+            // Redireccionar con un mensaje de éxito
+            return redirect()->to(base_url('proyectos'))->with('mensaje', 'Proyecto guardado con éxito');
+        } else {
+            // Manejar error en caso de fallo
+            return redirect()->back()->withInput()->with('error', 'No se pudo guardar el proyecto');
+        }
     }
 }

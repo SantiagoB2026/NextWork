@@ -1,32 +1,35 @@
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bienvenido a Nextwork</title>
-    <link rel="icon" type="image/png" href="../assets/img/Logo_Nextwork.png">
-        <!-- Importación de tipografía -->
-        <link href="https://googleapis.com" rel="stylesheet">
-       
-        <!-- ESTILOS INTERNOS (Para evitar problemas de rutas de carpetas) -->
-        <link rel="stylesheet" href="../assets/css/todo.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a Nextwork</title>
+    <!-- CORREGIDO: Ruta del Favicon absoluta -->
+    <link type="image/png" href="<?= base_url('assets/img/Logo_Nextwork.png') ?>" rel="icon">
+    
+    <!-- Importación de tipografía -->
+    <link href="https://googleapis.com" rel="stylesheet">
+   
+    <!-- CORREGIDO: Todos los estilos locales ahora usan base_url() y nunca se romperán -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/todo.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/register.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/login.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/perfil.css') ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
 
-    </head>
-    <body>
-
-
-        <!-- 1. HEADER SEPARADO -->
+<!-- 1. HEADER SEPARADO -->
 <!-- Línea decorativa verde superior fija en el diseño -->
 <div class="top-line"></div>
-
 
 <header class="main-header">
     <div class="header-container">
         <!-- Contenedor del Logo -->
         <div class="brand-logo">
-           <a href="/">
-                <img src="../assets/img/logoverdecompleto.png" alt="Logo Nextwork">
+           <a href="<?= base_url('/') ?>">
+                <!-- CORREGIDO: Imagen del logo con ruta absoluta -->
+                <img src="<?= base_url('assets/img/logoverdecompleto.png') ?>" alt="Logo Nextwork">
             </a>
         </div>
        
@@ -35,7 +38,6 @@
             <input type="text" name="query" class="search-input" placeholder="Search" autocomplete="off" aria-label="Buscar">
             <button type="submit" class="search-button" aria-label="Buscar"></button>
         </form>
-
 
         <!-- Grupo de Botones / Control de sesión PHP -->
         <div class="button-group">
@@ -47,11 +49,12 @@
                 <a href="<?= site_url('login') ?>" class="btn btn-login">Iniciar sesión</a>
             <?php endif; ?>
         </div>
-<a href="<?= site_url('perfil') ?>" class="btn btn-login"><div class="avatar-img" id="ewAvatar">
-  <?= esc(mb_substr(session()->get('name'), 0, 1)) ?>
-</div></a>
+        <a href="<?= site_url('perfil') ?>" class="btn btn-login">
+            <div class="avatar-img" id="ewAvatar">
+                <?= esc(mb_substr(session()->get('name') ?? 'U', 0, 1)) ?>
+            </div>
+        </a>
     </div>
-
 
     <!-- Menú inferior de Etiquetas requerido por el mockup -->
     <nav class="nav-tags-container">
@@ -68,8 +71,6 @@
             <li><a href="#">Etiqueta</a></li>
             <li class="divider">|</li>
             <li><a href="#" class="discover-link">Descubrir</a></li>
-
-            
         </ul>
     </nav>
 </header>

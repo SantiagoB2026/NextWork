@@ -21,9 +21,12 @@ $routes->group('Administrador', ['filter' => 'auth'], static function ($routes) 
     $routes->post('eliminar/(:num)', 'Administrador::eliminar/$1');
 });
 $routes->group('desarrollador', ['filter' => 'isDesarrollador'], function($routes) {
-    $routes->get('crear-proyecto', 'Proyectos::crear');
-    $routes->post('guardar-proyecto', 'Proyectos::guardar');
+    $routes->get('proyectos/nuevo', 'ProyectosController::nuevo');
 });
-$routes->get('perfil', 'Perfil::index');
+
+// Ponla aquí afuera para que sea exactamente 'perfil/guardarProyecto'
+$routes->post('perfil/guardarProyecto', 'ProyectosController::guardar');
+
+$routes->get('perfil', 'Perfil::index');    
 $routes->get('perfil/(:num)', 'Perfil::index/$1');
 
