@@ -12,6 +12,9 @@ class Buscar extends BaseController
         // CAPTURA EL PARÁMETRO 'query' DEL FORMULARIO
         $keyword = $this->request->getGet('query'); 
 
+        // Obtiene el ID del usuario logueado desde la sesión
+        $miId = session()->get('id'); 
+
         $resultados = [
             'usuarios'  => [],
             'proyectos' => [],
@@ -22,11 +25,18 @@ class Buscar extends BaseController
             $userModel = new UserModel();
             $proModel  = new ProModel();
 
-            $resultados['usuarios'] = $userModel->like('alias', $keyword)
-                                                ->orLike('nombre', $keyword)
-                                                ->orLike('apellido', $keyword)
-                                                ->findAll();
+            // AHORA BUSCA ÚNICAMENTE POR EL ALIAS (NOMBRE DE USUARIO)
+            $userModel->like('alias', $keyword);
 
+            // Sigue excluyendo tu propio usuario logueado para que no te encuentres a vos mismo
+            if ($miId) {
+                $campoId = $userModel->primaryKey; 
+                $userModel->where($campoId . ' !=', $miId); 
+            }
+
+            $resultados['usuarios'] = $userModel->findAll();
+
+            // Los proyectos se siguen buscando igual (por título, descripción o etiqueta)
             $resultados['proyectos'] = $proModel->groupStart()
                                                     ->like('titulo', $keyword)
                                                     ->orLike('descripcion', $keyword)
