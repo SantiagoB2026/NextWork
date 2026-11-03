@@ -31,7 +31,7 @@ class ProyectosController extends BaseController
             'descripcion'       => $this->request->getPost('descripcion'),
             'dinero_conseguir'  => $this->request->getPost('dinero_conseguir'),
             'fecha_publicacion' => date('Y-m-d'), 
-            'autor'             => session()->get('name') ?? 'Anonimo', 
+            'autor'             => session()->get('alias') ?? 'Anonimo', 
             'etiqueta'          => 'General'
         ];
 

@@ -41,15 +41,13 @@ class Auth extends BaseController
             'fecha_nacimiento'   => $this->request->getPost('fecha_nacimiento'),
             'contraseña'         => password_hash($this->request->getPost('contraseña'), PASSWORD_DEFAULT),
             'tipo' => $this->request->getPost('tipo')
-    
-            // Nota: Si agregás 'role' a tu BD, recordá ponerlo también en $allowedFields en tu UserModel
         ]);
 
         if (!$resultado) {
             return redirect()->back()->withInput()->with('errores', $userModel->errors());
         }
 
-        return redirect()->to('/login') // Cambiado a /login según tu ruta
+        return redirect()->to('/login') 
             ->with('exito', 'Registro completado. Ahora podés iniciar sesión.');
     }
 
@@ -67,27 +65,28 @@ class Auth extends BaseController
     {
         $userModel = new UserModel();
 
-        
         $email    = $this->request->getPost('correo_electronico');
         $password = $this->request->getPost('contraseña');
 
-       
         $user = $userModel->where('correo_electronico', $email)->first();
 
         if ($user && password_verify($password, $user['contraseña'])) {
 
+            // AQUÍ AGREGAMOS EL ALIAS A LA SESIÓN
             session()->set([
                 'id'         => $user['id_usuario'],
+                'alias'      => $user['alias'], // <-- Esta es la clave para guardar el Alias
                 'name'       => $user['nombre'], 
                 'email'      => $user['correo_electronico'],
                 'tipo'       => $user['tipo'], 
                 'isLoggedIn' => true
-    ]);
-             return redirect()->to('/');
+            ]);
+            return redirect()->to('/');
         }
 
         return redirect()->back()->withInput()->with('errores', ['login' => 'Correo o contraseña incorrectos.']);
     }
+
     public function logout()
     {
         session()->destroy();

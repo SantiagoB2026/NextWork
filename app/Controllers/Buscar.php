@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\ProModel;
+use App\Models\ProyectoModel;
 
 class Buscar extends BaseController
 {
@@ -23,7 +23,7 @@ class Buscar extends BaseController
 
         if (!empty($keyword)) {
             $userModel = new UserModel();
-            $proModel  = new ProModel();
+            $ProyectoModel  = new ProyectoModel();
 
             // AHORA BUSCA ÚNICAMENTE POR EL ALIAS (NOMBRE DE USUARIO)
             $userModel->like('alias', $keyword);
@@ -37,7 +37,7 @@ class Buscar extends BaseController
             $resultados['usuarios'] = $userModel->findAll();
 
             // Los proyectos se siguen buscando igual (por título, descripción o etiqueta)
-            $resultados['proyectos'] = $proModel->groupStart()
+            $resultados['proyectos'] = $ProyectoModel->groupStart()
                                                     ->like('titulo', $keyword)
                                                     ->orLike('descripcion', $keyword)
                                                     ->orLike('etiqueta', $keyword)
