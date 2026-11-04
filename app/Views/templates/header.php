@@ -55,21 +55,25 @@
         </a>
     </div>
 
-    <!-- Menú inferior de Etiquetas requerido por el mockup -->
+<?php
+    // Etiquetas del menú (se leen de la base de datos) y etiqueta activa según la URL
+    $etiquetasNav = model(\App\Models\EtiquetaModel::class)->orderBy('nombre')->findAll(10);
+    $uriActual    = service('request')->getUri();
+    $slugActual   = $uriActual->getSegment(1) === 'etiqueta' ? $uriActual->getSegment(2) : null;
+?>
+    <!-- Menú inferior de Etiquetas: cada una filtra los proyectos -->
     <nav class="nav-tags-container">
         <ul class="nav-tags">
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
-            <li><a href="#">Etiqueta</a></li>
+            <?php foreach ($etiquetasNav as $et): ?>
+                <li>
+                    <a href="<?= site_url('etiqueta/' . $et['slug']) ?>"<?= $slugActual === $et['slug'] ? ' class="active"' : '' ?>>
+                        <?= esc($et['nombre']) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
             <li class="divider">|</li>
-            <li><a href="#" class="discover-link">Descubrir</a></li>
+            <li><a href="<?= site_url('etiquetas') ?>" class="discover-link">Descubrir</a></li>
         </ul>
     </nav>
+    <style>.nav-tags a.active { font-weight: 700; text-decoration: underline; }</style>
 </header>

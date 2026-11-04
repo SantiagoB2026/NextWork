@@ -39,6 +39,31 @@
                 <input type="number" name="dinero_conseguir" step="0.01" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px;">
             </div>
 
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; margin-bottom: 6px; font-weight: 500; color: #555;">Etiquetas (máximo 5):</label>
+                <?php if (! empty($etiquetas)): ?>
+                    <div id="selectorEtiquetas" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <?php foreach ($etiquetas as $et): ?>
+                            <label style="display: inline-flex; align-items: center; gap: 6px; border: 1px solid #ccc; border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 14px; color: #444;">
+                                <input type="checkbox" name="etiquetas[]" value="<?= (int) $et['id_etiqueta'] ?>">
+                                <?= esc($et['nombre']) ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                    <script>
+                        // Limita la selección a 5 etiquetas (el servidor también lo valida)
+                        document.getElementById('selectorEtiquetas').addEventListener('change', function () {
+                            var marcadas = this.querySelectorAll('input:checked');
+                            this.querySelectorAll('input:not(:checked)').forEach(function (i) {
+                                i.disabled = marcadas.length >= 5;
+                            });
+                        });
+                    </script>
+                <?php else: ?>
+                    <p style="margin: 0; color: #888; font-size: 14px;">Aún no hay etiquetas disponibles.</p>
+                <?php endif; ?>
+            </div>
+
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
                 <button type="button" onclick="document.getElementById('formProyecto').style.display='none'" style="background-color: #e0e0e0; color: #333; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; cursor: pointer;">
                     Cancelar
