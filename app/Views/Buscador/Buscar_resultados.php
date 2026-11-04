@@ -17,7 +17,6 @@
 
 
         <!-- APARTADO USUARIOS -->
-                <!-- APARTADO USUARIOS -->
         <div id="usuarios-tab" class="tab-content active">
             <?php if (!empty($usuarios) && is_array($usuarios)): ?>
                 <ul class="list-container">
@@ -57,13 +56,7 @@
                         <li class="project-item">
                             <h4 class="project-title"><?= esc($proy['titulo'] ?? 'Sin título') ?></h4>
                             <p class="project-desc"><?= nl2br(esc($proy['descripcion'] ?? 'Sin descripción')) ?></p>
-                            <?php if (! empty($proy['etiquetas'])): ?>
-                                <?php foreach ($proy['etiquetas'] as $et): ?>
-                                    <a class="project-tag" href="<?= site_url('etiqueta/' . $et['slug']) ?>">#<?= esc($et['nombre']) ?></a>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <span class="project-tag">#Ninguna</span>
-                            <?php endif; ?>
+                            <span class="project-tag">#<?= esc($proy['etiqueta'] ?? 'Ninguna') ?></span>
                         </li>
                     <?php endforeach; ?>
                 </ul>

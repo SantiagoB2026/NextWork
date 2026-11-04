@@ -61,6 +61,7 @@ class Auth extends BaseController
     }
 
     // 4. PROCESO DE INICIO DE SESIÓN 
+        // 4. PROCESO DE INICIO DE SESIÓN (En App\Controllers\Auth.php)
     public function processLogin()
     {
         $userModel = new UserModel();
@@ -72,20 +73,22 @@ class Auth extends BaseController
 
         if ($user && password_verify($password, $user['contraseña'])) {
 
-            // AQUÍ AGREGAMOS EL ALIAS A LA SESIÓN
+            // AQUÍ AGREGAMOS LA FOTO DE PERFIL A LA SESIÓN AUTOMÁTICAMENTE AL LOGUEARSE
             session()->set([
-                'id'         => $user['id_usuario'],
-                'alias'      => $user['alias'], // <-- Esta es la clave para guardar el Alias
-                'name'       => $user['nombre'], 
-                'email'      => $user['correo_electronico'],
-                'tipo'       => $user['tipo'], 
-                'isLoggedIn' => true
+                'id'          => $user['id_usuario'],
+                'alias'       => $user['alias'], 
+                'name'        => $user['nombre'], 
+                'email'       => $user['correo_electronico'],
+                'tipo'        => $user['tipo'], 
+                'foto_perfil' => $user['foto_perfil'] ?? null, // 👈 ASEGURATE DE TENER ESTA LÍNEA AQUÍ
+                'isLoggedIn'  => true
             ]);
             return redirect()->to('/');
         }
 
         return redirect()->back()->withInput()->with('errores', ['login' => 'Correo o contraseña incorrectos.']);
     }
+
 
     public function logout()
     {

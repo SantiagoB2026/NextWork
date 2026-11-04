@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/register.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/login.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/perfil.css') ?>">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://jsdelivr.net" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
 
@@ -38,6 +38,7 @@
             <input type="text" name="query" class="search-input" placeholder="Search" autocomplete="off" aria-label="Buscar">
             <button type="submit" class="search-button" aria-label="Buscar"></button>
         </form>
+
         <!-- Grupo de Botones / Control de sesión PHP -->
         <div class="button-group">
             <?php if (session()->get('isLoggedIn')): ?>
@@ -48,11 +49,25 @@
                 <a href="<?= site_url('login') ?>" class="btn btn-login">Iniciar sesión</a>
             <?php endif; ?>
         </div>
-        <a href="<?= site_url('perfil') ?>" class="btn btn-login">
-            <div class="avatar-img" id="ewAvatar">
-                <?= esc(mb_substr(session()->get('name') ?? 'U', 0, 1)) ?>
-            </div>
-        </a>
+
+        <!-- EL AVATAR AHORA ES INTELIGENTE -->
+        <?php if (session()->get('isLoggedIn')): ?>
+            <?php 
+                $sessionFoto = session()->get('foto_perfil'); 
+                $tieneFoto = (!empty($sessionFoto) && file_exists(FCPATH . 'uploads/perfiles/' . $sessionFoto));
+            ?>
+            <a href="<?= site_url('perfil') ?>" class="btn btn-login" style="text-decoration: none; padding: 0;">
+                <div class="avatar-img" id="ewAvatar" style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; background-size: cover; background-position: center; border: 1px solid #e8e8e8; <?= ($tieneFoto) ? "background-image: url('" . base_url('uploads/perfiles/' . $sessionFoto) . "'); color: transparent;" : 'background-color: #f0f0f0;' ?>">
+                    
+                    <!-- Si NO tiene foto cargada aún, muestra una silueta de usuario limpia en lugar de la U -->
+                    <?php if (!$tieneFoto): ?>
+                        <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="#999999" style="width: 22px; height: 22px;">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    <?php endif; ?>
+                </div>
+            </a>
+        <?php endif; ?>
     </div>
 
 <?php
