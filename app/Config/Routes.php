@@ -38,3 +38,5 @@ $routes->group('Administrador', ['filter' => 'auth'], static function ($routes) 
     $routes->post('actualizar/(:num)', 'Administrador::actualizar/$1');
     $routes->post('eliminar/(:num)', 'Administrador::eliminar/$1');
 });
+$routes->post('perfil/subirFoto', 'Perfil::subirFoto');
+

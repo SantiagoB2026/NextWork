@@ -17,21 +17,28 @@
 
 
         <!-- APARTADO USUARIOS -->
+                <!-- APARTADO USUARIOS -->
         <div id="usuarios-tab" class="tab-content active">
             <?php if (!empty($usuarios) && is_array($usuarios)): ?>
                 <ul class="list-container">
                     <?php foreach ($usuarios as $user): ?>
                         <li class="user-item">
-                            <!-- Avatar circular con la inicial del alias -->
-                            <div class="user-avatar">
-                                <?= mb_substr(esc($user['alias']), 0, 1) ?>
+                            <!-- Avatar circular: Si tiene foto la muestra, si no usa la inicial -->
+                            <div class="user-avatar" style="background-size: cover; background-position: center; <?= (!empty($user['foto_perfil']) && file_exists(FCPATH . 'uploads/perfiles/' . $user['foto_perfil'])) ? "background-image: url('" . base_url('uploads/perfiles/' . $user['foto_perfil']) . "'); color: transparent;" : '' ?>">
+                                <?php if (empty($user['foto_perfil']) || !file_exists(FCPATH . 'uploads/perfiles/' . $user['foto_perfil'])): ?>
+                                    <?= mb_substr(esc($user['alias']), 0, 1) ?>
+                                <?php endif; ?>
                             </div>
+                            
                             <div class="user-info">
                                 <span class="user-alias">@<?= esc($user['alias']) ?></span>
                                 <span class="user-fullname"><?= esc($user['nombre'] ?? '') ?> <?= esc($user['apellido'] ?? '') ?></span>
                             </div>
-                            <!-- Botón de acción opcional integrado al estilo de la plataforma -->
-                            <button class="btn-view-profile">Ver perfil</button>
+                            
+                            <!-- Botón dinámico que redirige al perfil usando su ID correspondiente -->
+                            <a href="<?= base_url('perfil/index/' . $user['id_usuario']) ?>" class="btn-view-profile" style="text-decoration: none;">
+                                Ver perfil
+                            </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -39,6 +46,7 @@
                 <p class="empty-message">No se encontraron usuarios con ese criterio.</p>
             <?php endif; ?>
         </div>
+
 
 
         <!-- APARTADO PROYECTOS -->
