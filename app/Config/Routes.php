@@ -11,6 +11,10 @@ $routes->get('/', 'Home::index');
 $routes->get('logout', 'Auth::logout');
 $routes->get('search/results', 'Buscar::index');
 
+// --- ETIQUETAS (públicas): listado general y filtro de proyectos por etiqueta ---
+$routes->get('etiquetas', 'EtiquetasController::index');
+$routes->get('etiqueta/(:segment)', 'EtiquetasController::ver/$1');
+
 // --- RUTAS DE INVITADOS (Solo si NO estás logueado) ---
 $routes->get('login', 'Auth::login', ['filter' => 'redirectIfAuth']);
 $routes->post('login', 'Auth::processLogin');
@@ -37,6 +41,11 @@ $routes->group('Administrador', ['filter' => 'auth'], static function ($routes) 
     $routes->get('editar/(:num)', 'Administrador::editar/$1');
     $routes->post('actualizar/(:num)', 'Administrador::actualizar/$1');
     $routes->post('eliminar/(:num)', 'Administrador::eliminar/$1');
+
+    // Gestión de etiquetas (AuthFilter exige tipo 'admin' bajo /Administrador)
+    $routes->get('etiquetas', 'EtiquetasController::admin');
+    $routes->post('etiquetas/guardar', 'EtiquetasController::guardar');
+    $routes->post('etiquetas/eliminar/(:num)', 'EtiquetasController::eliminar/$1');
 });
 $routes->post('perfil/subirFoto', 'Perfil::subirFoto');
 
