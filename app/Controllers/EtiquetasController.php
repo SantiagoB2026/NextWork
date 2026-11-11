@@ -29,8 +29,10 @@ class EtiquetasController extends BaseController
         }
 
         $proyectoModel = new ProyectoModel();
-        $proyectos     = $proyectoModel->conEtiquetas(
-            $proyectoModel->porEtiqueta((int) $etiqueta['id_etiqueta'])
+        $proyectos     = $proyectoModel->conProgreso(
+            $proyectoModel->conEtiquetas(
+                $proyectoModel->porEtiqueta((int) $etiqueta['id_etiqueta'])
+            )
         );
 
         return view('Etiquetas/ver', [

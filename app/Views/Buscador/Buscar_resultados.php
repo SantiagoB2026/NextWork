@@ -47,7 +47,7 @@
                 <ul class="list-container">
                     <?php foreach ($proyectos as $proy): ?>
                         <li class="project-item">
-                            <h4 class="project-title"><?= esc($proy['titulo'] ?? 'Sin título') ?></h4>
+                            <h4 class="project-title"><a href="<?= site_url('proyecto/' . (int) $proy['id_proyecto']) ?>" style="color: inherit; text-decoration: none;"><?= esc($proy['titulo'] ?? 'Sin título') ?></a></h4>
                             <p class="project-desc"><?= nl2br(esc($proy['descripcion'] ?? 'Sin descripción')) ?></p>
                             <?php if (! empty($proy['etiquetas'])): ?>
                                 <?php foreach ($proy['etiquetas'] as $et): ?>

@@ -1,17 +1,20 @@
 <?php
 namespace App\Filters;
 
+use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Filters\FilterInterface;
 
-class RedirectIfAuthenticated implements FilterInterface
+class InversionistaFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Corregido: Si ya inició sesión, redirigir a la raíz '/' o a '/perfil'
-        if (session()->get('isLoggedIn')) {
-            return redirect()->to('/'); 
+        if (! session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('errores', ['acceso' => 'Inicia sesión para continuar.']);
+        }
+
+        if (session()->get('tipo') !== 'inversionista') {
+            return redirect()->to('/')->with('errores', ['acceso' => 'Acceso exclusivo para inversionistas.']);
         }
     }
 

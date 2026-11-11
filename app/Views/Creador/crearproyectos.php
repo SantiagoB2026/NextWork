@@ -17,8 +17,12 @@
         </div>
     <?php endif; ?>
 
+    <?php if (session()->getFlashdata('exito')): ?>
+        <div class="np-flash np-flash--ok"><?= esc(session()->getFlashdata('exito')) ?></div>
+    <?php endif; ?>
+
     <!-- Formulario oculto que aparece al dar click -->
-    <div id="formProyecto" style="display:none; background-color: #ffffff; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 20px; animation: fadeIn 0.3s ease;">
+    <div id="formProyecto" style="display: <?= ! empty($abrirFormulario) ? 'block' : 'none' ?>; background-color: #ffffff; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 20px; animation: fadeIn 0.3s ease;">
         <h3 style="margin-top: 0; margin-bottom: 20px; color: #444; border-bottom: 1px solid #eee; padding-bottom: 10px;">Nuevo Proyecto</h3>
         
         <form action="<?= base_url('desarrollador/proyectos/guardar') ?>" method="POST">
@@ -36,7 +40,7 @@
 
             <div style="margin-bottom: 25px;">
                 <label style="display: block; margin-bottom: 6px; font-weight: 500; color: #555;">Dinero a conseguir ($):</label>
-                <input type="number" name="dinero_conseguir" step="0.01" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px;">
+                <input type="number" name="dinero_conseguir" step="1" min="1" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px;">
             </div>
 
             <div style="margin-bottom: 25px;">
@@ -74,6 +78,18 @@
             </div>
         </form>
     </div>
+    <!-- Mis proyectos publicados, con su barra de progreso -->
+    <section style="margin-top: 35px;">
+        <?php if (! empty($proyectos)): ?>
+            <div class="np-grid">
+                <?php foreach ($proyectos as $proy): ?>
+                    <?= view('Proyectos/_tarjeta', ['proy' => $proy]) ?>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="np-vacio">Todavía no publicaste ningún proyecto.</p>
+        <?php endif; ?>
+    </section>
 <?php endif; ?>
 </main>
 

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/register.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/login.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/perfil.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/proyectos.css') ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
@@ -41,6 +42,11 @@
         <!-- Grupo de Botones / Control de sesión PHP -->
         <div class="button-group">
             <?php if (session()->get('isLoggedIn')): ?>
+                <?php if (session()->get('tipo') === 'desarrollador'): ?>
+                    <a href="<?= site_url('desarrollador/proyectos') ?>" class="btn btn-login">Mis proyectos</a>
+                <?php elseif (session()->get('tipo') === 'inversionista'): ?>
+                    <a href="<?= site_url('inversionista/donaciones') ?>" class="btn btn-login">Mis inversiones</a>
+                <?php endif; ?>
                 <a href="<?= site_url('logout') ?>" class="btn btn-cerrar">Cerrar Sesión</a>
             <?php else: ?>
                 <!-- Elementos por si no ha iniciado sesión, alineados al diseño -->

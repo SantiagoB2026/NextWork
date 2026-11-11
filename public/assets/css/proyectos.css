@@ -1,0 +1,67 @@
+/* Proyectos, barra de progreso y donaciones (verde Nextwork: #00b464) */
+.np-page { max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; font-family: system-ui, -apple-system, sans-serif; color: #333; }
+.np-page--angosta { max-width: 640px; }
+.np-encabezado { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 2px solid #f0f0f0; margin-bottom: 24px; padding-bottom: 12px; }
+.np-volver { display: inline-block; margin-bottom: 16px; color: #009f58; text-decoration: none; font-weight: 500; }
+.np-volver:hover { text-decoration: underline; }
+.np-vacio { color: #777; }
+
+/* Rejilla y tarjetas */
+.np-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.np-card { display: flex; flex-direction: column; gap: 10px; background: #fff; border: 1px solid #e8eee9; border-radius: 14px; padding: 20px; box-shadow: 0 4px 14px rgba(0,0,0,.05); }
+.np-card__title { margin: 0; font-size: 1.1rem; }
+.np-card__title a { color: #333; text-decoration: none; }
+.np-card__title a:hover { color: #009f58; }
+.np-card__autor { margin: 0; font-size: 13px; color: #888; }
+.np-card__desc { margin: 0; color: #666; font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.np-card__cta { margin-top: auto; text-align: center; }
+
+/* Etiquetas */
+.np-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.np-tag { background: #e9f7ee; color: #1e7e34; padding: 3px 10px; border-radius: 999px; font-size: 12px; text-decoration: none; }
+.np-tag:hover { background: #d3f0de; }
+
+/* Barra de progreso: se anima desde 0 hasta el valor real cada vez que se carga la página */
+.np-progreso { display: flex; flex-direction: column; gap: 6px; }
+.np-barra { width: 100%; height: 12px; background: #e8eee9; border-radius: 999px; overflow: hidden; }
+.np-barra__relleno { height: 100%; width: var(--ancho, 0%); background: linear-gradient(90deg, #00b464, #35d98b); border-radius: 999px; animation: np-llenar 1.2s ease-out; }
+.np-barra__relleno--meta { background: linear-gradient(90deg, #009f58, #00b464); }
+@keyframes np-llenar { from { width: 0; } }
+.np-progreso__texto { display: flex; justify-content: space-between; font-size: 14px; color: #555; }
+.np-progreso__pct { font-weight: 600; color: #009f58; }
+
+/* Botones */
+.np-btn { display: inline-block; padding: 10px 20px; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; }
+.np-btn--verde { background: #00b464; color: #fff; }
+.np-btn--verde:hover { background: #009f58; }
+.np-btn--block { display: block; width: 100%; text-align: center; box-sizing: border-box; }
+
+/* Página de proyecto */
+.np-detalle { display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
+@media (max-width: 800px) { .np-detalle { grid-template-columns: 1fr; } }
+.np-detalle__titulo { margin: 0 0 8px; font-size: 1.8rem; font-weight: 700; }
+.np-detalle__desc { line-height: 1.6; color: #444; margin-top: 16px; }
+.np-insignia { display: inline-block; background: #00b464; color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; margin-bottom: 10px; }
+.np-panel { display: flex; flex-direction: column; gap: 16px; background: #fff; border: 1px solid #e8eee9; border-radius: 14px; padding: 22px; box-shadow: 0 4px 14px rgba(0,0,0,.05); }
+.np-panel--ancho { margin-top: 28px; }
+.np-subtitulo { margin: 0; font-size: 1.1rem; }
+.np-stats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #555; }
+.np-miaporte, .np-nota { margin: 0; font-size: 13px; color: #777; }
+.np-miaporte strong { color: #009f58; }
+
+/* Donar */
+.np-form { display: flex; flex-direction: column; gap: 12px; }
+.np-form__label { font-weight: 600; }
+.np-form__input { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+.np-presets { display: flex; gap: 8px; flex-wrap: wrap; }
+.np-preset { padding: 8px 16px; border: 1px solid #00b464; background: #fff; color: #009f58; border-radius: 999px; font-weight: 600; cursor: pointer; }
+.np-preset:hover { background: #e9f7ee; }
+
+/* Mensajes y tablas */
+.np-flash { padding: 12px 18px; border-radius: 8px; margin-bottom: 18px; }
+.np-flash--ok { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.np-flash--error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.np-tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
+.np-tabla th { text-align: left; padding: 10px; border-bottom: 2px solid #eee; color: #555; }
+.np-tabla td { padding: 10px; border-bottom: 1px solid #f0f0f0; }
+.np-tabla a { color: #009f58; text-decoration: none; font-weight: 600; }
