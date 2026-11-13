@@ -1,5 +1,10 @@
 <?= view('templates/header') ?>
-<?php $idProyecto = (int) $proyecto['id_proyecto']; ?>
+<?php
+helper('proyectos');
+
+$idProyecto = (int) $proyecto['id_proyecto'];
+$falta      = max(0, round((float) $proyecto['dinero_conseguir'] - (float) $proyecto['recaudado'], 2));
+?>
 
 <main class="np-page np-page--angosta">
     <a class="np-volver" href="<?= site_url('proyecto/' . $idProyecto) ?>">&larr; Volver al proyecto</a>
@@ -17,14 +22,18 @@
             <?= csrf_field() ?>
 
             <label for="monto" class="np-form__label">¿Cuánto quieres aportar? ($)</label>
+            <p class="np-nota" style="margin: 0;">Faltan <strong><?= dinero($falta) ?></strong> para llegar a la meta; no se puede aportar más que eso.</p>
 
             <div class="np-presets">
                 <?php foreach ([10, 25, 50, 100] as $preset): ?>
-                    <button type="button" class="np-preset" data-monto="<?= $preset ?>">$<?= $preset ?></button>
+                    <?php if ($preset <= $falta): ?>
+                        <button type="button" class="np-preset" data-monto="<?= $preset ?>">$<?= $preset ?></button>
+                    <?php endif; ?>
                 <?php endforeach; ?>
+                <button type="button" class="np-preset" data-monto="<?= number_format($falta, 2, '.', '') ?>">Completar la meta (<?= dinero($falta) ?>)</button>
             </div>
 
-            <input type="number" id="monto" name="monto" class="np-form__input" min="1" step="0.01" required
+            <input type="number" id="monto" name="monto" class="np-form__input" min="0.01" max="<?= number_format($falta, 2, '.', '') ?>" step="0.01" required
                    placeholder="Otro monto" value="<?= esc(old('monto')) ?>">
 
             <button type="submit" class="np-btn np-btn--verde np-btn--block">Confirmar donación</button>

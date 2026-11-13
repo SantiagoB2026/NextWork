@@ -31,7 +31,11 @@
                                 <span class="user-fullname"><?= esc($user['nombre'] ?? '') ?> <?= esc($user['apellido'] ?? '') ?></span>
                             </div>
                             <!-- Botón de acción opcional integrado al estilo de la plataforma -->
-                            <button class="btn-view-profile">Ver perfil</button>
+                            <?php if (session()->get('isLoggedIn') && \App\Models\MensajeModel::puedenChatear(session()->get('tipo'), $user['tipo'] ?? null)): ?>
+                                <a class="btn-view-profile" href="<?= site_url('mensajes/' . (int) $user['id_usuario']) ?>" style="text-decoration: none;">Enviar mensaje</a>
+                            <?php else: ?>
+                                <button class="btn-view-profile">Ver perfil</button>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

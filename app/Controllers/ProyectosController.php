@@ -2,8 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Libraries\AccesoProyecto;
+use App\Libraries\ImagenesProyecto;
+use App\Models\CalificacionModel;
+use App\Models\ColaboradorModel;
+use App\Models\ComentarioModel;
 use App\Models\DonacionModel;
 use App\Models\EtiquetaModel;
+use App\Models\ImagenModel;
 use App\Models\ProyectoModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
@@ -22,16 +28,20 @@ class ProyectosController extends BaseController
     /** desarrollador/proyectos/nuevo : lo mismo, con el formulario abierto */
     public function nuevo()
     {
+        if ((new ProyectoModel())->alcanzoLimite((int) session()->get('id'))) {
+            return redirect()->to('desarrollador/proyectos')->with('error', $this->mensajeLimite());
+        }
+
         return $this->vistaMisProyectos(true);
     }
 
     private function vistaMisProyectos(bool $abrirFormulario)
     {
-        $idLogueado    = session()->get('id');
+        $idLogueado    = (int) session()->get('id');
         $proyectoModel = new ProyectoModel();
 
         $proyectos = $proyectoModel->conProgreso(
-            $proyectoModel->conEtiquetas($proyectoModel->delUsuario((int) $idLogueado))
+            $proyectoModel->conEtiquetas($proyectoModel->delUsuario($idLogueado))
         );
 
         return view('Creador/crearproyectos', [
@@ -40,12 +50,32 @@ class ProyectosController extends BaseController
             'etiquetas'           => (new EtiquetaModel())->orderBy('nombre')->findAll(),
             'proyectos'           => $proyectos,
             'abrirFormulario'     => $abrirFormulario,
+            'invitaciones'        => (new ColaboradorModel())->pendientesDe($idLogueado),
+            'limiteAlcanzado'     => $proyectoModel->alcanzoLimite($idLogueado),
+            'proyectosActivos'    => $proyectoModel->contarCreados($idLogueado),
+            'maxProyectos'        => ProyectoModel::MAX_POR_DESARROLLADOR,
         ]);
+    }
+
+    private function mensajeLimite(): string
+    {
+        $max = ProyectoModel::MAX_POR_DESARROLLADOR;
+
+        return ProyectoModel::CONTAR_SOLO_ACTIVOS
+            ? "Alcanzaste el máximo de {$max} proyectos activos. Cuando uno llegue a su meta podrás crear otro."
+            : "Alcanzaste el máximo de {$max} proyectos por desarrollador.";
     }
 
     // Procesa y guarda los datos enviados por el formulario
     public function guardar()
     {
+        $idUsuario = (int) session()->get('id');
+        $model     = new ProyectoModel();
+
+        if ($model->alcanzoLimite($idUsuario)) {
+            return redirect()->to('desarrollador/proyectos')->with('error', $this->mensajeLimite());
+        }
+
         $reglas = [
             'titulo'           => 'required|max_length[100]',
             'descripcion'      => 'required|max_length[500]',
@@ -56,14 +86,13 @@ class ProyectosController extends BaseController
             return redirect()->back()->withInput()->with('error', implode(' ', $this->validator->getErrors()));
         }
 
-        $model         = new ProyectoModel();
         $etiquetaModel = new EtiquetaModel();
 
         // Etiquetas elegidas en el formulario (checkboxes name="etiquetas[]")
         $idsEtiquetas = array_slice((array) $this->request->getPost('etiquetas'), 0, self::MAX_ETIQUETAS);
 
         $data = [
-            'id_usuario'        => (int) session()->get('id'),
+            'id_usuario'        => $idUsuario,
             'titulo'            => $this->request->getPost('titulo'),
             'descripcion'       => $this->request->getPost('descripcion'),
             'dinero_conseguir'  => $this->request->getPost('dinero_conseguir'),
@@ -82,11 +111,19 @@ class ProyectosController extends BaseController
 
         $db->transComplete();
 
-        if ($idNuevo && $db->transStatus()) {
-            return redirect()->to('desarrollador/proyectos')->with('exito', 'Proyecto publicado con éxito.');
+        if (! $idNuevo || ! $db->transStatus()) {
+            return redirect()->back()->withInput()->with('error', 'No se pudo guardar el proyecto');
         }
 
-        return redirect()->back()->withInput()->with('error', 'No se pudo guardar el proyecto');
+        // Las imágenes se guardan una vez creado el proyecto; si alguna falla, el proyecto igual queda publicado
+        $imagenes  = ImagenesProyecto::guardar((int) $idNuevo, $this->request);
+        $respuesta = redirect()->to('desarrollador/proyectos')->with('exito', 'Proyecto publicado con éxito.');
+
+        if (! empty($imagenes['errores'])) {
+            $respuesta = $respuesta->with('error', 'El proyecto se publicó, pero: ' . implode(' ', $imagenes['errores']));
+        }
+
+        return $respuesta;
     }
 
     // ---------- PÁGINA DE UN PROYECTO (cada rol ve su versión) ----------
@@ -101,19 +138,26 @@ class ProyectosController extends BaseController
             throw PageNotFoundException::forPageNotFound('No existe el proyecto solicitado.');
         }
 
-        $proyecto  = $model->conProgreso($model->conEtiquetas([$proyecto]))[0];
-        $idUsuario = (int) session()->get('id');
-        $tipo      = session()->get('isLoggedIn') ? session()->get('tipo') : null;
-        $esDueno   = $tipo === 'desarrollador' && (int) ($proyecto['id_usuario'] ?? 0) === $idUsuario;
+        $acceso = AccesoProyecto::de($proyecto);
 
-        $donaciones = new DonacionModel();
+        // Los proyectos que llegaron a su meta se ocultan al público
+        if (! $acceso['puedeVer']) {
+            throw PageNotFoundException::forPageNotFound('No existe el proyecto solicitado.');
+        }
 
-        return view('Proyectos/ver', [
-            'proyecto'  => $proyecto,
-            'tipo'      => $tipo,
-            'esDueno'   => $esDueno,
-            'miAporte'  => $tipo === 'inversionista' ? $donaciones->totalDeUsuarioEnProyecto($idUsuario, $id) : 0,
-            'recientes' => $esDueno ? $donaciones->recientesDeProyecto($id, 10) : [],
+        $proyecto      = $model->conProgreso($model->conEtiquetas([$proyecto]))[0];
+        $colaboradores = new ColaboradorModel();
+        $donaciones    = new DonacionModel();
+
+        return view('Proyectos/ver', $acceso + [
+            'proyecto'       => $proyecto,
+            'equipo'         => $colaboradores->equipo($id),
+            'invitados'      => $acceso['esDueno'] ? $colaboradores->invitadosPendientes($id) : [],
+            'imagenes'       => (new ImagenModel())->deProyecto($id),
+            'comentarios'    => (new ComentarioModel())->deProyecto($id),
+            'miCalificacion' => $acceso['tipo'] === 'inversionista' ? (new CalificacionModel())->de($id, $acceso['yo']) : 0,
+            'miAporte'       => $acceso['tipo'] === 'inversionista' ? $donaciones->totalDeUsuarioEnProyecto($acceso['yo'], $id) : 0,
+            'recientes'      => $acceso['esEquipo'] ? $donaciones->recientesDeProyecto($id, 10) : [],
         ]);
     }
 }

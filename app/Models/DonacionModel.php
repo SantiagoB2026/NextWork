@@ -49,4 +49,17 @@ class DonacionModel extends Model
             ->orderBy('ultimo', 'DESC')
             ->findAll();
     }
+
+    /** Dinero que recibieron en total los proyectos creados por un desarrollador */
+    public function totalRecaudadoPor(int $idDesarrollador): float
+    {
+        $fila = $this->db->table('Donaciones d')
+            ->selectSum('d.monto', 'total')
+            ->join('Proyectos p', 'p.id_proyecto = d.id_proyecto')
+            ->where('p.id_usuario', $idDesarrollador)
+            ->get()
+            ->getRowArray();
+
+        return (float) ($fila['total'] ?? 0);
+    }
 }

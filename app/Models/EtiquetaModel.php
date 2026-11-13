@@ -61,8 +61,9 @@ class EtiquetaModel extends Model
     /** Todas las etiquetas con la cantidad de proyectos que tiene cada una */
     public function todasConConteo(): array
     {
-        return $this->select('Etiquetas.*, COUNT(pe.id_proyecto) AS total_proyectos')
+        return $this->select('Etiquetas.*, COUNT(p.id_proyecto) AS total_proyectos')
             ->join('ProyectoEtiqueta pe', 'pe.id_etiqueta = Etiquetas.id_etiqueta', 'left')
+            ->join('Proyectos p', 'p.id_proyecto = pe.id_proyecto AND p.financiado_at IS NULL', 'left')
             ->groupBy('Etiquetas.id_etiqueta')
             ->orderBy('Etiquetas.nombre')
             ->findAll();
