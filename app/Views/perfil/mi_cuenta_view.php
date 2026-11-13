@@ -154,5 +154,7 @@
 
   </div>
 </main>
+  <?= view('templates/footer') ?>
 
-<?= view('templates/footer') ?>
+
+

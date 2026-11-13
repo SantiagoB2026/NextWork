@@ -10,7 +10,7 @@ class FiltroAutentificacion implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Si el usuario ya está logueado, lo mandamos a la página  principal
+        // Si el usuario ya está logueado, lo mandamos a l a página  principal
         if (session()->get('isLoggedIn')) {
             return redirect()->to('/'); 
         }
