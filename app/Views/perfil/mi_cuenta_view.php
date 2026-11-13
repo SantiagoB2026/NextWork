@@ -126,9 +126,11 @@
     <?php endif; ?>
 
   </div>
+
+  <?= view('templates/footer') ?>
 </main>
 
-<?= view('templates/footer') ?>
+
 
 
 <!-- FIN DEL PERFIL EXTWORK -->

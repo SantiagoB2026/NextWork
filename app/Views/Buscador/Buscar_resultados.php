@@ -74,7 +74,7 @@
     <?php endif; ?>
 </div>
 
-
+  <?= view('templates/footer') ?>
 <!-- ESTILOS CSS ADAPTADOS A NEXTWORK: Agregalos a tu archivo .css o bloque <style> -->
 <style>
     :root {
