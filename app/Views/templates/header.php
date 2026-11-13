@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/register.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/login.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/perfil.css') ?>">
-    <link href="https://jsdelivr.net" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?= base_url('assets/css/proyectos.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/comunidad.css') ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
 
@@ -42,6 +44,15 @@
         <!-- Grupo de Botones / Control de sesión PHP -->
         <div class="button-group">
             <?php if (session()->get('isLoggedIn')): ?>
+                <?php if (in_array(session()->get('tipo'), ['desarrollador', 'inversionista'], true)): ?>
+                    
+                <?php endif; ?>
+                <?php if (session()->get('tipo') === 'desarrollador'): ?>
+                    <?php $invPendientes = (new \App\Models\ColaboradorModel())->contarPendientes((int) session()->get('id')); ?>
+                    <a href="<?= site_url('desarrollador/proyectos') ?>" class="btn btn-login">Mis proyectos<?php if ($invPendientes > 0): ?> <span class="np-badge"><?= $invPendientes ?></span><?php endif; ?></a>
+                <?php elseif (session()->get('tipo') === 'inversionista'): ?>
+                    <a href="<?= site_url('inversionista/donaciones') ?>" class="btn btn-login">Mis inversiones</a>
+                <?php endif; ?>
                 <a href="<?= site_url('logout') ?>" class="btn btn-cerrar">Cerrar Sesión</a>
             <?php else: ?>
                 <!-- Elementos por si no ha iniciado sesión, alineados al diseño -->

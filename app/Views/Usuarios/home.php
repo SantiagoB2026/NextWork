@@ -6,17 +6,18 @@
     <!-- Contenedor dinámico según el estado de la sesión -->
     <div class="welcome-container">
         <!-- Bloque de bienvenida para usuarios NO logueados -->
-        <?php if (!session()->get('isLoggedIn')): ?>
-        
-
-        <!-- Insignia del rol del usuario (Inversionista / Desarrollador) -->
+        <?php if (session()->get('isLoggedIn')): ?>
+        <!-- Insignia del rol del usuario -->
         <div class="user-badge">
             <?php if (session()->get('tipo') === 'inversionista'): ?>
                 <h1 class="badge-title">Inversionista</h1>
             <?php elseif (session()->get('tipo') === 'desarrollador'): ?>
                 <h1 class="badge-title">Desarrollador</h1>
+            <?php elseif (session()->get('tipo') === 'admin'): ?>
+                <h1 class="badge-title">Administrador</h1>
             <?php endif; ?>
         </div>
+        <?php endif; ?>
     </div>
 
     <!-- ESTRUCTURA DEL PROTOTIPO GRÁFICO -->
@@ -42,7 +43,7 @@
     <!-- Contenido frontal fijo (Textos y Botón) -->
     <div class="slide-content-overlay">
       <div>
-        <img src="../assests/img/Logo_Nextwork_Blanco.png">
+        <img src="<?= base_url('assets/img/Logo_Nextwork_Blanco.png') ?>" alt="Nextwork">
       </div>
 
       <h2 class="main-title-text">
@@ -275,16 +276,20 @@
 
     </section>
 
-    <!-- Sección 2: Bloque de Proyectos Destacados -->
-    <section class="mockup-section">
+    <!-- Sección 2: Proyectos destacados (los que más dinero llevan recaudado) -->
+    <section class="mockup-section" id="destacados">
         <h2 class="section-title">Proyectos destacados</h2>
-        <div class="projects-grid">
-            <div class="image-placeholder project-card">IMG</div>
-            <div class="image-placeholder project-card">IMG</div>
-        </div>
+        <?php if (! empty($destacados)): ?>
+            <div class="np-grid">
+                <?php foreach ($destacados as $proy): ?>
+                    <?= view('Proyectos/_tarjeta', ['proy' => $proy]) ?>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="np-vacio">Todavía no hay proyectos publicados.</p>
+        <?php endif; ?>
     </section>
 </main>
-<?php endif; ?>
 
 <script>
   const carousel = new bootstrap.Carousel('#myCarousel')

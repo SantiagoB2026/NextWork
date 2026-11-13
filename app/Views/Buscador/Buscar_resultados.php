@@ -33,11 +33,12 @@
                                 <span class="user-alias">@<?= esc($user['alias']) ?></span>
                                 <span class="user-fullname"><?= esc($user['nombre'] ?? '') ?> <?= esc($user['apellido'] ?? '') ?></span>
                             </div>
-                            
-                            <!-- Botón dinámico que redirige al perfil usando su ID correspondiente -->
-                            <a href="<?= base_url('perfil/index/' . $user['id_usuario']) ?>" class="btn-view-profile" style="text-decoration: none;">
-                                Ver perfil
-                            </a>
+                            <!-- Botón de acción opcional integrado al estilo de la plataforma -->
+                            <?php if (session()->get('isLoggedIn') && \App\Models\MensajeModel::puedenChatear(session()->get('tipo'), $user['tipo'] ?? null)): ?>
+                                <a class="btn-view-profile" href="<?= site_url('mensajes/' . (int) $user['id_usuario']) ?>" style="text-decoration: none;">Enviar mensaje</a>
+                            <?php else: ?>
+                                <button class="btn-view-profile">Ver perfil</button>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -54,7 +55,7 @@
                 <ul class="list-container">
                     <?php foreach ($proyectos as $proy): ?>
                         <li class="project-item">
-                            <h4 class="project-title"><?= esc($proy['titulo'] ?? 'Sin título') ?></h4>
+                            <h4 class="project-title"><a href="<?= site_url('proyecto/' . (int) $proy['id_proyecto']) ?>" style="color: inherit; text-decoration: none;"><?= esc($proy['titulo'] ?? 'Sin título') ?></a></h4>
                             <p class="project-desc"><?= nl2br(esc($proy['descripcion'] ?? 'Sin descripción')) ?></p>
                             <span class="project-tag">#<?= esc($proy['etiqueta'] ?? 'Ninguna') ?></span>
                         </li>

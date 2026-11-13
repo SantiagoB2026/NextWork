@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\ProyectoModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Home extends BaseController {
@@ -12,11 +13,17 @@ class Home extends BaseController {
     public function __construct(){
  $this->Usuarios = new UserModel();
  }
-    public function index(){
-        return view('Usuarios/home', [
-            'Usuarios' => $this->Usuarios->orderBy('alias')->findAll()
-    ]);
- }
+    public function index()
+    {
+        // Inicio para todos (con o sin sesión): proyectos destacados abajo
+        $proyectoModel = new ProyectoModel();
+
+        $destacados = $proyectoModel->conProgreso(
+            $proyectoModel->conEtiquetas($proyectoModel->destacados(6))
+        );
+
+        return view('Usuarios/home', ['destacados' => $destacados]);
+    }
 
     public function nuevo(){
         return view('Usuarios/form', ['Usuarios' => null]);
