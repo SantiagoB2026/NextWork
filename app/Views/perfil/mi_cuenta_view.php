@@ -142,7 +142,7 @@
       <?php endif; ?>
 
       <?php if (! empty($puede_crear)): ?>
-        <!-- Botón que solo ve el dueño del perfil (desarrollador) -->
+        <!-- Botón que  solo ve el dueño del perfil (desarrollador) -->
         <a href="<?= base_url('desarrollador/proyectos/nuevo') ?>" class="btn btn-primary">
           Crear Nuevo Proyecto
         </a>
@@ -155,6 +155,3 @@
   </div>
 </main>
   <?= view('templates/footer') ?>
-
-
-

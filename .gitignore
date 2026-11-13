@@ -13,7 +13,7 @@ writable/session/*
 writable/uploads/*
 !writable/uploads/index.html
 
-# Archivos de configuración de editores / SO
+# Archivos de confm iguración de editores / SO
 .vscode/
 .idea/
 *.suo
