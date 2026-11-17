@@ -15,7 +15,6 @@
 .np-card__autor { margin: 0; font-size: 13px; color: #888; }
 .np-card__desc { margin: 0; color: #666; font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .np-card__cta { margin-top: auto; text-align: center; }
-
 /* Etiquetas */
 .np-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .np-tag { background: #e9f7ee; color: #1e7e34; padding: 3px 10px; border-radius: 999px; font-size: 12px; text-decoration: none; }
