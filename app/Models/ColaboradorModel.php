@@ -62,10 +62,10 @@ class ColaboradorModel extends Model
     }
 
     /** Desarrolladores que ya forman parte del equipo de un proyecto */
-    public function equipo(int $idProyecto): array
+    public function equipo(int $idProyecto,): array
     {
         return $this->tabla()
-            ->select('u.id_usuario, u.alias')
+            ->select('u.id_usuario, u.alias, u.foto_perfil')
             ->join('Usuario u', 'u.id_usuario = ProyectoColaboradores.id_usuario')
             ->where('ProyectoColaboradores.id_proyecto', $idProyecto)
             ->where('ProyectoColaboradores.estado', 'aceptado')

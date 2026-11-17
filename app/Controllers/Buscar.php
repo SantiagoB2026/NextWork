@@ -26,7 +26,7 @@ class Buscar extends BaseController
             $proyectoModel = new ProyectoModel();
 
             // BUSCA ÚNICAMENTE POR EL ALIAS (NOMBRE DE USUARIO)
-            $userModel->like('alias', $keyword);
+            $userModel->like('alias', $keyword, 'after');
 
             // Excluye tu propio usuario logueado para que no te encuentres a vos mismo
             if ($miId) {

@@ -40,6 +40,7 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
             <?php elseif ($esColaborador): ?>
                 <span class="np-insignia">Eres parte del equipo</span>
             <?php endif; ?>
+            
 
             <h1 class="np-detalle__titulo"><?= esc($proyecto['titulo']) ?></h1>
             <p class="np-card__autor">
@@ -82,17 +83,23 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
 
             <!-- Equipo del proyecto -->
             <h2 class="np-subtitulo" style="margin-top: 28px;">Equipo</h2>
-            <ul class="np-equipo">
+                        <ul class="np-equipo">
                 <li>
-                    <span class="np-avatar"><?= esc(mb_strtoupper(mb_substr($proyecto['autor'], 0, 1))) ?></span>
+                    <?php $tieneFotoCreador = ! empty($fotoCreador) && is_file(FCPATH . 'uploads/perfiles/' . $fotoCreador); ?>
+                    <span class="np-avatar" style="overflow: hidden; background-size: cover; background-position: center; <?= $tieneFotoCreador ? "background-image: url('" . base_url('uploads/perfiles/' . $fotoCreador) . "'); color: transparent;" : '' ?>">
+                        <?= esc(mb_strtoupper(mb_substr($proyecto['autor'], 0, 1))) ?>
+                    </span>
                     <span class="np-equipo__nombre">@<?= esc($proyecto['autor']) ?> <small>Creador</small></span>
                     <?php if ($puedeEscribir && $idCreador > 0 && $idCreador !== $yo): ?>
                         <a class="np-btn np-btn--borde" href="<?= site_url('mensajes/' . $idCreador) ?>">Escribir</a>
                     <?php endif; ?>
                 </li>
                 <?php foreach ($equipo as $miembro): ?>
+                    <?php $tieneFotoMiembro = ! empty($miembro['foto_perfil']) && is_file(FCPATH . 'uploads/perfiles/' . $miembro['foto_perfil']); ?>
                     <li>
-                        <span class="np-avatar"><?= esc(mb_strtoupper(mb_substr($miembro['alias'], 0, 1))) ?></span>
+                        <span class="np-avatar" style="overflow: hidden; background-size: cover; background-position: center; <?= $tieneFotoMiembro ? "background-image: url('" . base_url('uploads/perfiles/' . $miembro['foto_perfil']) . "'); color: transparent;" : '' ?>">
+                            <?= esc(mb_strtoupper(mb_substr($miembro['alias'], 0, 1))) ?>
+                        </span>
                         <span class="np-equipo__nombre">@<?= esc($miembro['alias']) ?> <small>Colaborador</small></span>
                         <?php if ($puedeEscribir && (int) $miembro['id_usuario'] !== $yo): ?>
                             <a class="np-btn np-btn--borde" href="<?= site_url('mensajes/' . (int) $miembro['id_usuario']) ?>">Escribir</a>
@@ -100,6 +107,7 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
                     </li>
                 <?php endforeach; ?>
             </ul>
+
 
             <?php if ($esDueno): ?>
                 <form action="<?= site_url('desarrollador/proyectos/' . $idProyecto . '/invitar') ?>" method="POST" class="np-invitar">
@@ -186,7 +194,7 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
                 <?php endif; ?>
             </div>
 
-            <?php if ($tipo === 'inversionista'): ?>
+                        <?php if ($tipo === 'inversionista'): ?>
                 <?php if ($miAporte > 0): ?>
                     <p class="np-miaporte">Tu aporte hasta ahora: <strong><?= dinero($miAporte) ?></strong></p>
                 <?php endif; ?>
@@ -204,6 +212,16 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
                 <?php endif; ?>
             <?php elseif ($esEquipo): ?>
                 <p class="np-nota">Así ven los inversionistas este proyecto. La barra se llena con cada donación.</p>
+                <?php if ($esDueno): ?>
+                    <form action="<?= site_url('desarrollador/proyectos/' . $idProyecto . '/eliminar') ?>" method="POST"
+                          onsubmit="return confirm('¿Estás seguro de eliminar este proyecto? Esta acción no se puede deshacer.');"
+                          style="margin-top: 12px;">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="np-btn np-btn--block" style="background-color: #dc3545; color: #fff; border: none;">
+                            Eliminar proyecto
+                        </button>
+                    </form>
+                <?php endif; ?>
             <?php elseif ($tipo === null): ?>
                 <a class="np-btn np-btn--verde np-btn--block" href="<?= site_url('login') ?>">Inicia sesión para donar</a>
                 <p class="np-nota">Solo las cuentas de inversionista pueden donar.</p>
@@ -211,6 +229,7 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
                 <p class="np-nota">Solo las cuentas de inversionista pueden donar a los proyectos.</p>
             <?php endif; ?>
         </aside>
+
     </div>
 
     <?php if ($esEquipo): ?>
@@ -281,6 +300,7 @@ $maxImagenes   = \App\Libraries\ImagenesProyecto::MAX_POR_PROYECTO;
         <?php else: ?>
             <p class="np-vacio">Todavía no hay comentarios. ¡Sé el primero!</p>
         <?php endif; ?>
+        
     </section>
 </main>
 

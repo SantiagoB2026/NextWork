@@ -47,12 +47,14 @@ $routes->group('desarrollador', ['filter' => 'isDesarrollador'], function($route
     $routes->post('invitaciones/(:num)/rechazar', 'ColaboradoresController::rechazar/$1');
 
     // Imágenes del proyecto y moderación de comentarios (el controlador comprueba que seas del equipo)
-    $routes->post('proyectos/(:num)/imagenes', 'ImagenesController::subir/$1');
+   $routes->post('proyectos/(:num)/imagenes', 'ImagenesController::subir/$1');
     $routes->post('imagenes/(:num)/eliminar', 'ImagenesController::eliminar/$1');
     $routes->post('comentarios/(:num)/eliminar', 'ComentariosController::eliminar/$1');
     $routes->get('proyectos/nuevo', 'ProyectosController::nuevo');
     $routes->post('proyectos/guardar', 'ProyectosController::guardar'); 
+    $routes->post('proyectos/(:num)/eliminar', 'ProyectosController::eliminar/$1');
 });
+
 
 // --- RESTRICCIÓN: SOLO INVERSIONISTAS (donar y ver sus inversiones) ---
 $routes->group('inversionista', ['filter' => 'isInversionista'], function($routes) {

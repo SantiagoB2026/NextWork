@@ -10,24 +10,29 @@
 
       <!-- Columna 2: Descubrir (en 2 subcolumnas) -->
       <div class="footer-col footer-col-discover">
+        <?php
+            if (!isset($etiquetasNav)) {
+                $etiquetasNav = model(\App\Models\EtiquetaModel::class)->orderBy('nombre')->findAll(10);
+            }
+
+            $uriActual  = service('request')->getUri();
+            $slugActual = ($uriActual->getTotalSegments() >= 2 && $uriActual->getSegment(1) === 'etiqueta') 
+                          ? $uriActual->getSegment(2) 
+                          : null;
+        ?>
+
         <h4>Descubrir</h4>
-        <div class="discover-lists">
-          <ul>
-            <li><a href="#">Arte</a></li>
-            <li><a href="#">Ciencia</a></li>
-            <li><a href="#">Comida</a></li>
-            <li><a href="#">Educación</a></li>
-            <li><a href="#">Impacto social</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">Moda</a></li>
-            <li><a href="#">Música</a></li>
-            <li><a href="#">Salud</a></li>
-            <li><a href="#">Tecnología</a></li>
-            <li><a href="#">Videojuegos</a></li>
-          </ul>
-        </div>
+        <ul class="footer-tags">
+            <?php foreach ($etiquetasNav as $et): ?>
+                <li>
+                    <a href="<?= site_url('etiqueta/' . $et['slug']) ?>"<?= $slugActual === $et['slug'] ? ' class="active"' : '' ?>>
+                        <?= esc($et['nombre']) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
       </div>
+
 
       <!-- Columna 3: Acerca de nosotros -->
       <div class="footer-col footer-col-about">
@@ -249,5 +254,54 @@
     max-width: 90%;
   }
 }
+.footer-col-discover {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Título "Descubrir" en gris suave */
+.footer-col-discover h4 {
+    color: #9b9e9e;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 14px 0;
+}
+
+/* Lista dividida en 2 columnas de 5 filas */
+.footer-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-rows: repeat(5, auto); /* 5 elementos hacia abajo */
+    grid-auto-flow: column;              /* Los otros 5 pasan a la segunda columna */
+    column-gap: 45px;                    /* Espacio entre la columna 1 y la 2 */
+    row-gap: 10px;                       /* Espacio vertical entre cada enlace */
+}
+
+.footer-tags li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Enlaces en blanco */
+.footer-tags a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.3;
+    display: inline-block;
+    transition: opacity 0.2s ease;
+}
+
+.footer-tags a:hover,
+.footer-tags a.active {
+    text-decoration: underline;
+    opacity: 0.85;
+}
+              
 
 </style>

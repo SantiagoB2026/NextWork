@@ -20,7 +20,7 @@ class ComentarioModel extends Model
     /** Comentarios de un proyecto, los más nuevos primero, con alias y tipo de quien comentó */
     public function deProyecto(int $idProyecto, int $limite = 100): array
     {
-        return $this->select('Comentarios.*, u.alias, u.tipo')
+        return $this->select('Comentarios.*, u.alias, u.tipo, u.foto_perfil')
             ->join('Usuario u', 'u.id_usuario = Comentarios.id_usuario', 'left')
             ->where('Comentarios.id_proyecto', $idProyecto)
             ->orderBy('Comentarios.id_comentario', 'DESC')
