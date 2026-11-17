@@ -129,6 +129,7 @@ class ProyectosController extends BaseController
     // ---------- PÁGINA DE UN PROYECTO (cada rol ve su versión) ----------
 
     /** proyecto/{id} */
+        /** proyecto/{id} */
     public function ver(int $id)
     {
         $model    = new ProyectoModel();
@@ -148,9 +149,11 @@ class ProyectosController extends BaseController
         $proyecto      = $model->conProgreso($model->conEtiquetas([$proyecto]))[0];
         $colaboradores = new ColaboradorModel();
         $donaciones    = new DonacionModel();
+        $creador       = (new \App\Models\UserModel())->find($proyecto['id_usuario']);
 
         return view('Proyectos/ver', $acceso + [
             'proyecto'       => $proyecto,
+            'fotoCreador'    => $creador['foto_perfil'] ?? null,
             'equipo'         => $colaboradores->equipo($id),
             'invitados'      => $acceso['esDueno'] ? $colaboradores->invitadosPendientes($id) : [],
             'imagenes'       => (new ImagenModel())->deProyecto($id),
@@ -159,5 +162,38 @@ class ProyectosController extends BaseController
             'miAporte'       => $acceso['tipo'] === 'inversionista' ? $donaciones->totalDeUsuarioEnProyecto($acceso['yo'], $id) : 0,
             'recientes'      => $acceso['esEquipo'] ? $donaciones->recientesDeProyecto($id, 10) : [],
         ]);
+    }
+
+    public function eliminar(int $id)
+    {
+        $model    = new ProyectoModel();
+        $proyecto = $model->find($id);
+
+        if ($proyecto === null) {
+            throw PageNotFoundException::forPageNotFound('No existe el proyecto solicitado.');
+        }
+
+        $acceso = AccesoProyecto::de($proyecto);
+
+        // Solo el creador/dueño puede borrarlo; los colaboradores tienen $acceso['esDueno'] === false
+        if (! $acceso['esDueno']) {
+            return redirect()->to('proyecto/' . $id)->with('error', 'Solo el titular puede eliminar este proyecto.');
+        }
+
+        // 1. Borramos los archivos físicos de las imágenes del proyecto
+        $imagenes = (new ImagenModel())->deProyecto($id);
+        foreach ($imagenes as $img) {
+            $rutaArchivo = FCPATH . 'uploads/proyectos/' . $img['archivo'];
+            if (! empty($img['archivo']) && is_file($rutaArchivo)) {
+                @unlink($rutaArchivo);
+            }
+        }
+
+        // 2. Eliminamos el proyecto de la base de datos
+        if (! $model->delete($id)) {
+            return redirect()->to('proyecto/' . $id)->with('error', 'No se pudo eliminar el proyecto.');
+        }
+
+        return redirect()->to('desarrollador/proyectos')->with('exito', 'Proyecto eliminado correctamente.');
     }
 }
