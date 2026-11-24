@@ -103,7 +103,7 @@ class Perfil extends BaseController
             'foto' => [
                 'uploaded[foto]',
                 'mime_in[foto,image/jpg,image/jpeg,image/png,image/webp]',
-                'max_size[foto,4092]',
+                'max_size[foto,8184]',
             ]
         ]);
 

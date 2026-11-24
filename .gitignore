@@ -23,3 +23,5 @@ writable/uploads/*
 *.sw?
 Thumbs.db
 .DS_Store
+/vendor/
+.env
